@@ -22,12 +22,12 @@ public class ControlTerreno implements ActionListener {
         ICONO = null;
         if(contador%2==0)
         {   
-            ICONO = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\amarillo.png");
+            ICONO = new ImageIcon("src\\Imagenes\\amarillo.png");
             x.Turno=1;
         }
         else
         {
-            ICONO = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\rojo.png");
+            ICONO = new ImageIcon("src\\Imagenes\\rojo.png");
             x.Turno=2;
         }
         //ICONO = new ImageIcon(ICONO.getImage().getScaledInstance(,-1,java.awt.image.SCALE_DEFAULT)),;//

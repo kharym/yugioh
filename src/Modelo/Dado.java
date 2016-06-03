@@ -34,11 +34,11 @@ public class Dado {
         
         switch (Dado1){
             
-            case 1: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");   
+            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
     return icoImagen; 
@@ -49,11 +49,11 @@ public class Dado {
         
         switch (Dado2){
             
-            case 1: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");   
+            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
     return icoImagen; 
@@ -64,11 +64,11 @@ public class Dado {
         
         switch (Dado3){
             
-            case 1: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");   
+            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
     return icoImagen; 
@@ -79,11 +79,11 @@ public class Dado {
         
         switch (Dado4){
             
-            case 1: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\girodado.gif");   
+            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
     return icoImagen; 
