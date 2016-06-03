@@ -67,21 +67,62 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     System.out.println("Se presionó: "+i+","+j);}
                 
           
-                int ocupa= BoxForma.getSelectedIndex(); 
+                int ocupa= BoxForma.getSelectedIndex();
+                int rotado = BoxRotar.getSelectedIndex();
                 switch (ocupa) {
                     case 0:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                            ct = new ControlTerreno ();
-                            ct.despliegue(MatrizTablero[i][j]);
-                            ct.despliegue(MatrizTablero[i][j-1]);
-                            ct.despliegue(MatrizTablero[i][j-2]);
-                            ct.despliegue(MatrizTablero[i][j+1]);
-                            ct.despliegue(MatrizTablero[i+1][j]);
-                            ct.despliegue(MatrizTablero[i-1][j]);
-                            
-                            contador++;
+                       
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct.despliegue(MatrizTablero[i][j]);
+                                ct.despliegue(MatrizTablero[i][j-1]);
+                                ct.despliegue(MatrizTablero[i][j-2]);
+                                ct.despliegue(MatrizTablero[i][j+1]);
+                                ct.despliegue(MatrizTablero[i+1][j]);
+                                ct.despliegue(MatrizTablero[i-1][j]);
+                                                        
                         }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                    ct.despliegue(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i][j+1]);
+                                    ct.despliegue(MatrizTablero[i-2][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                                    ct.despliegue(MatrizTablero[i+1][j]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                    ct.despliegue(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i][j+2]);
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i][j+1]);
+                                    ct.despliegue(MatrizTablero[i+1][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                    ct.despliegue(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i+2][j]);
+                                    ct.despliegue(MatrizTablero[i][j+1]);
+                                    ct.despliegue(MatrizTablero[i+1][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                            
+                           
+                        }       
+                                break; 
+                        
+                        }
+                        
+                                break;
+                
+  
                     case 1:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
@@ -202,13 +243,15 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     default:
                         break;
                 }
+            }
                
                 
-                   
-            }
-        }    
-
     }
+    }    
+            
+            
+
+    
     
     
     
@@ -311,7 +354,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         lblDado4 = new javax.swing.JLabel();
         BoxForma = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        BotonRotar = new javax.swing.JComboBox<>();
+        BoxRotar = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -762,7 +805,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         lblDado4.setBorder(javax.swing.BorderFactory.createTitledBorder("dado 4"));
         getContentPane().add(lblDado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 570, 110, 100));
 
-        BoxForma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BoxForma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" }));
         BoxForma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BoxFormaActionPerformed(evt);
@@ -776,8 +819,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         jLabel11.setText("ROTAR");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 570, -1, 20));
 
-        BotonRotar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(BotonRotar, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 600, -1, -1));
+        BoxRotar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(BoxRotar, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 600, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 204, 0));
@@ -883,12 +926,12 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JButton BotonMover2;
     private javax.swing.JButton BotonMover3;
     private javax.swing.JButton BotonMover4;
-    private javax.swing.JComboBox<String> BotonRotar;
     private javax.swing.JComboBox<String> BotonTrampa1;
     private javax.swing.JComboBox<String> BotonTrampa2;
     private javax.swing.JComboBox<String> BotonTrampa3;
     private javax.swing.JComboBox<String> BotonTrampa4;
     private javax.swing.JComboBox<String> BoxForma;
+    private javax.swing.JComboBox<String> BoxRotar;
     private javax.swing.JComboBox<String> Dado11;
     private javax.swing.JComboBox<String> Dado12;
     private javax.swing.JComboBox<String> Dado13;
