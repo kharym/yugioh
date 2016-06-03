@@ -13,15 +13,15 @@ public class Dado {
         
         switch (vDados){
             
-            case 1: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\1.png");
+            case 1: icoImagen = new ImageIcon("src\\Imagenes\\1.png");
             break;
-            case 2: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\2.png");
+            case 2: icoImagen = new ImageIcon("src\\Imagenes\\2.png");
             break;
-            case 3: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\3.png");
+            case 3: icoImagen = new ImageIcon("src\\Imagenes\\3.png");
             break;
-            case 4: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\4.png");
+            case 4: icoImagen = new ImageIcon("src\\Imagenes\\4.png");
             break;
-            case 5: icoImagen = new ImageIcon("C:\\Users\\karim\\Documents\\NetBeansProjects\\yugioh\\src\\Imagenes\\5.png");  
+            case 5: icoImagen = new ImageIcon("src\\Imagenes\\5.png");  
             break;
         }
     
