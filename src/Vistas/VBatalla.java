@@ -72,27 +72,69 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                 int ocupa= BoxForma.getSelectedIndex();
                 int rotado = BoxRotar.getSelectedIndex();
                 
-                switch (ocupa) {
+              
+                       switch (ocupa) {
                     case 0:
-                       
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                            ct = new ControlTerreno ();
-                            cc= new ControlCriatura();
-                            cc.invocacion(MatrizTablero[i][j]);
-                            ct.despliegue(MatrizTablero[i][j-1]);
-                            ct.despliegue(MatrizTablero[i][j-2]);
-                            ct.despliegue(MatrizTablero[i][j+1]);
-                            ct.despliegue(MatrizTablero[i+1][j]);
-                            ct.despliegue(MatrizTablero[i-1][j]);
-                            
-                            contador++;
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno(); 
+                                cc = new ControlCriatura();
+                                cc.invocacion(MatrizTablero[i][j]);
+                                ct.despliegue(MatrizTablero[i][j-1]);
+                                ct.despliegue(MatrizTablero[i][j-2]);
+                                ct.despliegue(MatrizTablero[i][j+1]);
+                                ct.despliegue(MatrizTablero[i+1][j]);
+                                ct.despliegue(MatrizTablero[i-1][j]);
+                                                        
                         }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                    
+                                     ct = new ControlTerreno(); 
+                                    cc = new ControlCriatura();
+                                    cc.invocacion(MatrizTablero[i][j]);;
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i][j+1]);
+                                    ct.despliegue(MatrizTablero[i-2][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                                    ct.despliegue(MatrizTablero[i+1][j]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                     ct = new ControlTerreno(); 
+                                     cc = new ControlCriatura();
+                                     cc.invocacion(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i][j+2]);
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i][j+1]);
+                                    ct.despliegue(MatrizTablero[i+1][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                     ct = new ControlTerreno(); 
+                                    cc = new ControlCriatura();
+                                    cc.invocacion(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i+2][j]);
+                                    ct.despliegue(MatrizTablero[i][j+1]);
+                                    ct.despliegue(MatrizTablero[i+1][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                            
+                           
+                        }       break; 
+                        
+                        }       break; 
                     
                     case 1:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                           
                            ct.despliegue(MatrizTablero[i][j]);
                            ct.despliegue(MatrizTablero[i][j-1]);
                            ct.despliegue(MatrizTablero[i][j-2]);
@@ -105,7 +147,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     case 2:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                            
                             ct.despliegue(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i+1][j]);
                             ct.despliegue(MatrizTablero[i+1][j-1]);
@@ -118,7 +160,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     case 3:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                            
                             ct.despliegue(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i-1][j]);
                             ct.despliegue(MatrizTablero[i][j+1]);
@@ -131,7 +173,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     case 4:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                            
                             ct.despliegue(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i][j-1]);
                             ct.despliegue(MatrizTablero[i-1][j]);
@@ -144,7 +186,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     case 5:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                            
                             ct.despliegue(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i][j+1]);
                             ct.despliegue(MatrizTablero[i][j+2]);
@@ -170,7 +212,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     case 7:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                            
                             ct.despliegue(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i+1][j]);
                             ct.despliegue(MatrizTablero[i+1][j+1]);
@@ -183,7 +225,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     case 8:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                            
                             ct.despliegue(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i+1][j]);
                             ct.despliegue(MatrizTablero[i][j+1]);
@@ -196,7 +238,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                     case 9:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {
-                            ct = new ControlTerreno ();
+                            
                             ct.despliegue(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i][j-1]);
                             ct.despliegue(MatrizTablero[i+1][j]);
