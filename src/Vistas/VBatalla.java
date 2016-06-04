@@ -3,6 +3,7 @@ package Vistas;
 import Controladores.ControlBatalla;
 import Controladores.ControlDado;
 import Controladores.ControlTerreno;
+import Controladores.ControlCriatura;
 import Modelo.Posicion;
 import Modelo.Dado;
 
@@ -16,6 +17,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     ControlBatalla cb;
     ControlDado cd;
     ControlTerreno ct;
+    ControlCriatura cc;
     
     int contador;
  
@@ -69,60 +71,24 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
           
                 int ocupa= BoxForma.getSelectedIndex();
                 int rotado = BoxRotar.getSelectedIndex();
+                
                 switch (ocupa) {
                     case 0:
                        
-                        switch (rotado){
-                            case 0:
-                            if(e.getSource()==MatrizTablero[i][j].boton){
-                                ct.despliegue(MatrizTablero[i][j]);
-                                ct.despliegue(MatrizTablero[i][j-1]);
-                                ct.despliegue(MatrizTablero[i][j-2]);
-                                ct.despliegue(MatrizTablero[i][j+1]);
-                                ct.despliegue(MatrizTablero[i+1][j]);
-                                ct.despliegue(MatrizTablero[i-1][j]);
-                                                        
+                        if(e.getSource()==MatrizTablero[i][j].boton)
+                        {
+                            ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            
+                            contador++;
                         }       break;
-                            case 1:
-                                if(e.getSource()==MatrizTablero[i][j].boton){
-                                    ct.despliegue(MatrizTablero[i][j]);
-                                    ct.despliegue(MatrizTablero[i][j-1]);
-                                    ct.despliegue(MatrizTablero[i][j+1]);
-                                    ct.despliegue(MatrizTablero[i-2][j]);
-                                    ct.despliegue(MatrizTablero[i-1][j]);
-                                    ct.despliegue(MatrizTablero[i+1][j]);
-                            
-                            
-                        }       break;
-                            case 2:
-                                if(e.getSource()==MatrizTablero[i][j].boton){
-                                    ct.despliegue(MatrizTablero[i][j]);
-                                    ct.despliegue(MatrizTablero[i][j+2]);
-                                    ct.despliegue(MatrizTablero[i][j-1]);
-                                    ct.despliegue(MatrizTablero[i][j+1]);
-                                    ct.despliegue(MatrizTablero[i+1][j]);
-                                    ct.despliegue(MatrizTablero[i-1][j]);
-                            
-                            
-                        }       break;
-                            case 3:
-                                if(e.getSource()==MatrizTablero[i][j].boton){
-                                    ct.despliegue(MatrizTablero[i][j]);
-                                    ct.despliegue(MatrizTablero[i][j-1]);
-                                    ct.despliegue(MatrizTablero[i+2][j]);
-                                    ct.despliegue(MatrizTablero[i][j+1]);
-                                    ct.despliegue(MatrizTablero[i+1][j]);
-                                    ct.despliegue(MatrizTablero[i-1][j]);
-                            
-                           
-                        }       
-                                break; 
-                        
-                        }
-                        
-                                break;
-                
-  
+                    
                     case 1:
                         if(e.getSource()==MatrizTablero[i][j].boton)
                         {

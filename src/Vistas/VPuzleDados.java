@@ -1,22 +1,33 @@
 package Vistas;
 
+import Modelo.Criatura;
 import Controladores.ControlPuzleDados;
 import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class VPuzleDados extends javax.swing.JDialog {
+public class VPuzleDados extends javax.swing.JDialog implements ActionListener {
 
     ControlPuzleDados cpd;
+    
+   String nombreCriatura;
+    
+    
+    
     
     public VPuzleDados(ControlPuzleDados e) {
         initComponents();
         
         cpd = e;
+       
+        
     }
 
     private VPuzleDados(JFrame jFrame, boolean b) {
        
     }
 
+  
    
 
     /**
@@ -29,38 +40,38 @@ public class VPuzleDados extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listaReserva = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        listaA = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         botonVolver = new javax.swing.JButton();
         botonOk = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        cambioPuzle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jList1.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        listaReserva.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
+        listaReserva.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listaReserva);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 180, 220));
 
-        jList2.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        listaA.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
+        listaA.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10", "Item 11", "Item 12", "Item 13", "Item 14", "Item 15" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(listaA);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 180, 220));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 180, 260));
 
         jButton1.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
         jButton1.setText("QUITAR");
@@ -92,9 +103,9 @@ public class VPuzleDados extends javax.swing.JDialog {
         jButton5.setText("VER");
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 90, 40));
 
-        jLabel1.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/maxresdefault.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cambioPuzle.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
+        cambioPuzle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/maxresdefault.jpg"))); // NOI18N
+        getContentPane().add(cambioPuzle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,13 +163,27 @@ public class VPuzleDados extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonOk;
     private javax.swing.JButton botonVolver;
+    private javax.swing.JLabel cambioPuzle;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listaA;
+    private javax.swing.JList<String> listaReserva;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       
+        int dados = listaA.getSelectedIndex();
+       
+        switch (dados) {
+                    case 0:
+                       
+                        
+        
+        
+    }
+}
 }
