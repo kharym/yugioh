@@ -2,7 +2,7 @@
 package Controladores;
 
 import Modelo.Criatura;
-import Modelo.Dado;
+import Modelo.Dado2;
 
 import Modelo.Posicion;
 import Vistas.VBatalla;
@@ -21,15 +21,15 @@ public class ControlCriatura implements ActionListener {
      private int defensa; 
      private ImageIcon imagenCriatura;
      private int daño = defensa - ataque;
-     private int accionesAtaque;
-     String [] nombreimagenes = {"1.png","2.png","3.png","4.png","5.png"};
-     private ImageIcon cara1; 
-     private ImageIcon cara2;
-     private ImageIcon cara3;
-     private ImageIcon cara4;
-     private ImageIcon cara5;
-     private ImageIcon cara6;
-     Dado d; 
+     private int accionesAtaque; 
+    
+     private  String cara1; 
+     private  String cara2;
+     private  String cara3;
+     private  String cara4;
+     private  String cara5;
+     private  String cara6;
+     Dado2 d; 
      
       public ControlCriatura() {
          
@@ -82,74 +82,15 @@ public class ControlCriatura implements ActionListener {
     public void setAccionesAtaque(int accionesAtaque) {
         this.accionesAtaque = accionesAtaque;
     }
-   public ImageIcon getCara1() {
-        return cara1;
-    }
-
-    public void setCara1(ImageIcon cara1) {
-        this.cara1 = cara1;
-    }
-
-    public ImageIcon getCara2() {
-        return cara2;
-    }
-
-    public void setCara2(ImageIcon cara2) {
-        this.cara2 = cara2;
-    }
-
-    public ImageIcon getCara3() {
-        return cara3;
-    }
-
-    public void setCara3(ImageIcon cara3) {
-        this.cara3 = cara3;
-    }
-
-    public ImageIcon getCara4() {
-        return cara4;
-    }
-
-    public void setCara4(ImageIcon cara4) {
-        this.cara4 = cara4;
-    }
-
-    public ImageIcon getCara5() {
-        return cara5;
-    }
-
-    public void setCara5(ImageIcon cara5) {
-        this.cara5 = cara5;
-    }
-
-    public ImageIcon getCara6() {
-        return cara6;
-    }
-
-    public void setCara6(ImageIcon cara6) {
-        this.cara6 = cara6;
-    }
+  
    
      private Posicion[][]MatrizTablero = new Posicion [15][15];
  
     
-     
-     public void comparacion (){
-     
-     
-     
-     }
-     
-     
-     
-     
-     
-     
-     
-     public void invocacion1(Posicion x )
-    {
+      
         
-         
+         public void invocacion1 (Posicion x){
+          
          ControlCriatura criatura3= new ControlCriatura();
          ControlCriatura criatura4= new ControlCriatura();
          ControlCriatura criatura5= new ControlCriatura();
@@ -163,16 +104,9 @@ public class ControlCriatura implements ActionListener {
          ControlCriatura criatura13= new ControlCriatura();
          ControlCriatura criatura14= new ControlCriatura();
          ControlCriatura criatura15= new ControlCriatura();
-         
-         
-         
-         
-         
-         
-        
         
          ControlCriatura criatura1= new ControlCriatura(); // instanciar criatura 1
-        
+                
          criatura1.setAtaque(1000);                        // asignacion a metodos de criatura1
          criatura1.setDefensa(500);
          criatura1.setNombreCriatura("mago oscuro");
@@ -181,24 +115,30 @@ public class ControlCriatura implements ActionListener {
         imagenCriatura = null;
         if(contador%2==0)
         {   
-            imagenCriatura = new ImageIcon("src\\Imagenes\\mago oscuro.jpg");
+        imagenCriatura = new ImageIcon("src\\Imagenes\\mago oscuro.jpg");
            
         }
         x.boton.setIcon(imagenCriatura);
         x.boton.removeActionListener(this);
         
         
+        }
+
+   
         
         
-        ControlCriatura criatura2= new ControlCriatura();
+        
+         
+       /** ControlCriatura criatura2= new ControlCriatura();
          criatura2.setAtaque(300);
          criatura2.setDefensa(200);
          criatura2.setNombreCriatura("kuriboh");
-         criatura2.setPuntosDeVida(1000); 
+         criatura2.setPuntosDeVida(1000); **/
        
         
-    }
-    
+        
+        
+
     
     
     public int atacar (){
@@ -221,6 +161,10 @@ public class ControlCriatura implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
     }
+
+   
+
+    
     
 
 }

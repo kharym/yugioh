@@ -1,6 +1,6 @@
 package Controladores;
 
-
+import Modelo.Posicion;
 import Vistas.VBatalla;
 
 public class ControlBatalla {
@@ -25,39 +25,25 @@ public class ControlBatalla {
       
     }
     
-    public void lanzarDado (){
+   
+        
     
-  ControlDado objDado = new ControlDado(); 
-        int dado1 =objDado.calcularnumero();
       
-        ControlDado objDado2 = new ControlDado(); 
-        int dado2 =objDado2.calcularnumero();
-        
-        
-        ControlDado objDado3 = new ControlDado(); 
-        int dado3 =objDado3.calcularnumero();
-        
-        
-       ControlDado objDado4 = new ControlDado();
-        int dado4 =objDado4.calcularnumero();
-        
     
-      vb.mostrarLanzamiento(dado1,dado2,dado3,dado4);
-    }
     
-    public void detenerDado (){
+    public void lanzar (){
     
-       ControlDado objDado = new ControlDado(); 
-        int num1 = objDado.calcularnumero();
+       ControlDado cara1 = new ControlDado(); 
+        int num1 = cara1.calcularnumero();
          
-        ControlDado objDado2 = new ControlDado();
-         int num2 = objDado2.calcularnumero();
+        ControlDado cara2 = new ControlDado();
+         int num2 = cara2.calcularnumero();
               
-        ControlDado objDado3 = new ControlDado();
-        int num3 = objDado3.calcularnumero();
+        ControlDado cara3 = new ControlDado();
+        int num3 = cara3.calcularnumero();
        
-         ControlDado objDado4 = new ControlDado();
-         int num4 = objDado4.calcularnumero();
+         ControlDado cara4 = new ControlDado();
+         int num4 = cara4.calcularnumero();
         
          vb.mostrarCarasObtenidas(num1,num2,num3,num4);
     }
@@ -109,5 +95,7 @@ public class ControlBatalla {
        
        while(monstruo1 && monstruo2);   
 }
+
+  
     
 }

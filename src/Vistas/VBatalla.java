@@ -6,7 +6,7 @@ import Controladores.ControlTerreno;
 import Controladores.ControlCriatura;
 import Controladores.ControlPuzleDados;
 import Modelo.Posicion;
-import Modelo.Dado;
+import Modelo.Dado2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +20,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     ControlTerreno ct;
     ControlCriatura cc;
     ControlPuzleDados cpd;
+    Posicion x;
+    
     
     int contador;
  
@@ -52,13 +54,6 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     }
 
  
-
-   
-
-    
-        
-    
-
     @Override
      public void actionPerformed(ActionEvent e) 
     {
@@ -658,7 +653,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton){
                                 ct = new ControlTerreno ();
                             cc= new ControlCriatura();
-                                    cc.invocacion1(MatrizTablero[i][j]);
+                            cc.invocacion1(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i+1][j]);
                             ct.despliegue(MatrizTablero[i+1][j-1]);
                             ct.despliegue(MatrizTablero[i-1][j+1]);
@@ -671,7 +666,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton){
                                 ct = new ControlTerreno ();
                             cc= new ControlCriatura();
-                                    cc.invocacion1(MatrizTablero[i][j]);
+                            cc.invocacion1(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i][j-1]);
                             ct.despliegue(MatrizTablero[i-1][j-1]);
                             ct.despliegue(MatrizTablero[i+1][j]);
@@ -701,30 +696,31 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     
     
     
-    public void mostrarLanzamiento(int dado1, int dado2, int dado3, int dado4){
-     
-        Dado objImag1 = new Dado();
-        lblDado1.setIcon(objImag1.gifDado1(dado1)); 
-        Dado objImag2 = new Dado();
-        lblDado2.setIcon(objImag2.gifDado2(dado2));
-        Dado objImag3 = new Dado();
-        lblDado3.setIcon(objImag3.gifDado3(dado3));
-        Dado objImag4 = new Dado();
-        lblDado4.setIcon(objImag4.gifDado4(dado4));
-    }
+
     
     public void mostrarCarasObtenidas(int num1,int num2,int num3,int num4){
-    
-         Dado objImag1 = new Dado();
-         lblDado1.setIcon(objImag1.Dado1(num1));
-         Dado objImag2 = new Dado();
-         lblDado2.setIcon(objImag2.Dado1(num2));
-         Dado objImag3 = new Dado(); 
-         lblDado3.setIcon(objImag3.Dado1(num3));
-         Dado objImag4 = new Dado();
-         lblDado4.setIcon(objImag4.Dado1(num4)); 
+    cc = new ControlCriatura();
+       String cara1criatura1 = "inv";
          
-    }
+         Dado2 cara1 = new Dado2();
+         lblDado1.setText(String.valueOf(cara1.Dado1(num1)));
+         Dado2 cara2 = new Dado2();
+         lblDado2.setText(String.valueOf(cara2.Dado1(num2)));
+         Dado2 cara3 = new Dado2(); 
+         lblDado3.setText(String.valueOf(cara3.Dado1(num3)));
+         Dado2 cara4 = new Dado2();
+         lblDado4.setText(String.valueOf(cara4.Dado1(num4)));
+       
+       String caraObtenida1 = (lblDado1.getText());
+       String caraObtenida2 = (lblDado2.getText());
+       String caraObtenida3 = (lblDado3.getText());
+       String caraObtenida4 = (lblDado4.getText());
+       
+      
+       if(cara1criatura1.equals(caraObtenida1)|| cara1criatura1.equals(caraObtenida2)||cara1criatura1.equals(caraObtenida3)||cara1criatura1.equals(caraObtenida4)){
+      {System.out.println("se invoca");} cc.invocacion1(x);} else {System.out.println("no se invoca");}
+       
+       }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -791,7 +787,6 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         PanelAcciones4 = new javax.swing.JPanel();
         Dado43 = new javax.swing.JComboBox<>();
         Dado42 = new javax.swing.JComboBox<>();
-        BotonLanzar = new javax.swing.JButton();
         BotonFinalizar = new javax.swing.JButton();
         BotonDetener = new javax.swing.JButton();
         lblDado1 = new javax.swing.JLabel();
@@ -1214,15 +1209,6 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         Dado42.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(Dado42, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 350, -1, -1));
 
-        BotonLanzar.setFont(new java.awt.Font("Engravers MT", 1, 10)); // NOI18N
-        BotonLanzar.setText("LANZAR");
-        BotonLanzar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonLanzarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(BotonLanzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 580, 110, -1));
-
         BotonFinalizar.setFont(new java.awt.Font("Engravers MT", 1, 10)); // NOI18N
         BotonFinalizar.setText("FINALIZAR");
         BotonFinalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -1233,27 +1219,39 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         getContentPane().add(BotonFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 120, -1));
 
         BotonDetener.setFont(new java.awt.Font("Engravers MT", 1, 10)); // NOI18N
-        BotonDetener.setText("DETENER");
+        BotonDetener.setText("lanzar");
         BotonDetener.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonDetenerActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonDetener, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 630, 110, -1));
+        getContentPane().add(BotonDetener, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 610, 110, -1));
 
+        lblDado1.setBackground(new java.awt.Color(255, 255, 0));
+        lblDado1.setFont(new java.awt.Font("Engravers MT", 3, 14)); // NOI18N
         lblDado1.setBorder(javax.swing.BorderFactory.createTitledBorder("dado 1"));
+        lblDado1.setOpaque(true);
         getContentPane().add(lblDado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 570, 110, 100));
 
+        lblDado2.setBackground(new java.awt.Color(255, 255, 0));
+        lblDado2.setFont(new java.awt.Font("Engravers MT", 3, 14)); // NOI18N
         lblDado2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDado2.setBorder(javax.swing.BorderFactory.createTitledBorder("dado2"));
+        lblDado2.setOpaque(true);
         getContentPane().add(lblDado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 570, 110, 100));
 
+        lblDado3.setBackground(new java.awt.Color(255, 255, 0));
+        lblDado3.setFont(new java.awt.Font("Engravers MT", 3, 14)); // NOI18N
         lblDado3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDado3.setBorder(javax.swing.BorderFactory.createTitledBorder("dado 3"));
+        lblDado3.setOpaque(true);
         getContentPane().add(lblDado3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 570, 110, 100));
 
+        lblDado4.setBackground(new java.awt.Color(255, 255, 0));
+        lblDado4.setFont(new java.awt.Font("Engravers MT", 3, 14)); // NOI18N
         lblDado4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDado4.setBorder(javax.swing.BorderFactory.createTitledBorder("dado 4"));
+        lblDado4.setOpaque(true);
         getContentPane().add(lblDado4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 570, 110, 100));
 
         BoxForma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" }));
@@ -1303,12 +1301,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonFinalizarActionPerformed
 
-    private void BotonLanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonLanzarActionPerformed
-    cb.lanzarDado();
-    }//GEN-LAST:event_BotonLanzarActionPerformed
-
     private void BotonDetenerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDetenerActionPerformed
-    cb.detenerDado();
+    cb.lanzar();
     }//GEN-LAST:event_BotonDetenerActionPerformed
 
     private void BotonAtacar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAtacar1ActionPerformed
@@ -1382,7 +1376,6 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JButton BotonAtacar4;
     private javax.swing.JButton BotonDetener;
     private javax.swing.JButton BotonFinalizar;
-    private javax.swing.JButton BotonLanzar;
     private javax.swing.JComboBox<String> BotonMagia1;
     private javax.swing.JComboBox<String> BotonMagia2;
     private javax.swing.JComboBox<String> BotonMagia3;
