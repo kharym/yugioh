@@ -3,29 +3,39 @@ package Modelo;
 
 import javax.swing.ImageIcon;
 
+import Controladores.ControlCriatura;
+import javax.swing.Icon;
+
 
 public class Dado {
     
     public int valorTira; 
-    public ImageIcon icoImagen;
+    public ImageIcon cara;
+    ControlCriatura cc;
     
-    public ImageIcon Imaen(int vDados){
+    
+    
+    public ImageIcon Dado1(int vDados){
         
         switch (vDados){
             
-            case 1: icoImagen = new ImageIcon("src\\Imagenes\\1.png");
+            case 1: cara = new ImageIcon("src\\Imagenes\\1.png");
             break;
-            case 2: icoImagen = new ImageIcon("src\\Imagenes\\2.png");
+            case 2: cara = new ImageIcon("src\\Imagenes\\2.png");
             break;
-            case 3: icoImagen = new ImageIcon("src\\Imagenes\\3.png");
+            case 3: cara = new ImageIcon("src\\Imagenes\\3.png");
             break;
-            case 4: icoImagen = new ImageIcon("src\\Imagenes\\4.png");
+            case 4: cara = new ImageIcon("src\\Imagenes\\4.png");
             break;
-            case 5: icoImagen = new ImageIcon("src\\Imagenes\\5.png");  
-            break;
+            case 5: cara = new ImageIcon("src\\Imagenes\\5.png"); 
+                    cc = new ControlCriatura();
+                  
+                   
+                    
+                    break;
         }
     
-    return icoImagen; 
+    return cara; 
         
     }
      
@@ -34,14 +44,14 @@ public class Dado {
         
         switch (Dado1){
             
-            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
+            case 1: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: cara = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
-    return icoImagen; 
+    return cara; 
     
         
     } 
@@ -49,14 +59,14 @@ public class Dado {
         
         switch (Dado2){
             
-            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
+            case 1: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: cara= new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: cara = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
-    return icoImagen; 
+    return cara; 
     
 }
  
@@ -64,14 +74,14 @@ public class Dado {
         
         switch (Dado3){
             
-            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
+            case 1: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: cara = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
-    return icoImagen; 
+    return cara; 
     
 } 
      
@@ -79,16 +89,17 @@ public class Dado {
         
         switch (Dado4){
             
-            case 1: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 2: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 3: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 4: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");
-            case 5: icoImagen = new ImageIcon("src\\Imagenes\\girodado.gif");   
+            case 1: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 2: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 3: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 4: cara = new ImageIcon("src\\Imagenes\\girodado.gif");
+            case 5: cara = new ImageIcon("src\\Imagenes\\girodado.gif");   
         }
     
-    return icoImagen; 
-    
+    return cara;
 } 
+
+    
      
     
 }

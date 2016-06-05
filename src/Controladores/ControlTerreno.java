@@ -23,12 +23,12 @@ public class ControlTerreno implements ActionListener {
         if(contador%2==0)
         {   
             ICONO = new ImageIcon("src\\Imagenes\\amarillo.png");
-            x.Turno=1;
+            
         }
         else
         {
             ICONO = new ImageIcon("src\\Imagenes\\rojo.png");
-            x.Turno=2;
+           
         }
         //ICONO = new ImageIcon(ICONO.getImage().getScaledInstance(,-1,java.awt.image.SCALE_DEFAULT)),;//
         x.boton.setIcon(ICONO);

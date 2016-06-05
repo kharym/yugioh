@@ -4,6 +4,7 @@ import Controladores.ControlBatalla;
 import Controladores.ControlDado;
 import Controladores.ControlTerreno;
 import Controladores.ControlCriatura;
+import Controladores.ControlPuzleDados;
 import Modelo.Posicion;
 import Modelo.Dado;
 
@@ -18,6 +19,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     ControlDado cd;
     ControlTerreno ct;
     ControlCriatura cc;
+    ControlPuzleDados cpd;
     
     int contador;
  
@@ -58,7 +60,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     
 
     @Override
-    public void actionPerformed(ActionEvent e) 
+     public void actionPerformed(ActionEvent e) 
     {
     for(int i=0; i<15;i++) // recorrer columnas 
         {
@@ -72,28 +74,28 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                 int ocupa= BoxForma.getSelectedIndex();
                 int rotado = BoxRotar.getSelectedIndex();
                 
-              
-                       switch (ocupa) {
+                switch (ocupa) {
                     case 0:
                         switch (rotado){
                             case 0:
                             if(e.getSource()==MatrizTablero[i][j].boton){
-                                ct = new ControlTerreno(); 
-                                cc = new ControlCriatura();
-                                cc.invocacion(MatrizTablero[i][j]);
-                                ct.despliegue(MatrizTablero[i][j-1]);
-                                ct.despliegue(MatrizTablero[i][j-2]);
-                                ct.despliegue(MatrizTablero[i][j+1]);
-                                ct.despliegue(MatrizTablero[i+1][j]);
-                                ct.despliegue(MatrizTablero[i-1][j]);
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            
+                            
                                                         
                         }       break;
                             case 1:
                                 if(e.getSource()==MatrizTablero[i][j].boton){
-                                    
-                                     ct = new ControlTerreno(); 
-                                    cc = new ControlCriatura();
-                                    cc.invocacion(MatrizTablero[i][j]);;
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
                                     ct.despliegue(MatrizTablero[i][j-1]);
                                     ct.despliegue(MatrizTablero[i][j+1]);
                                     ct.despliegue(MatrizTablero[i-2][j]);
@@ -104,9 +106,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         }       break;
                             case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton){
-                                     ct = new ControlTerreno(); 
-                                     cc = new ControlCriatura();
-                                     cc.invocacion(MatrizTablero[i][j]);
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
                                     ct.despliegue(MatrizTablero[i][j+2]);
                                     ct.despliegue(MatrizTablero[i][j-1]);
                                     ct.despliegue(MatrizTablero[i][j+1]);
@@ -117,9 +119,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         }       break;
                             case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton){
-                                     ct = new ControlTerreno(); 
-                                    cc = new ControlCriatura();
-                                    cc.invocacion(MatrizTablero[i][j]);
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
                                     ct.despliegue(MatrizTablero[i][j-1]);
                                     ct.despliegue(MatrizTablero[i+2][j]);
                                     ct.despliegue(MatrizTablero[i][j+1]);
@@ -129,125 +131,561 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                            
                         }       break; 
                         
-                        }       break; 
+                        
+                                                                                       
+                                } 
+                        
+                        break;
                     
                     case 1:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                           
-                           ct.despliegue(MatrizTablero[i][j]);
-                           ct.despliegue(MatrizTablero[i][j-1]);
-                           ct.despliegue(MatrizTablero[i][j-2]);
-                           ct.despliegue(MatrizTablero[i+1][j]);
-                           ct.despliegue(MatrizTablero[i+1][j+1]);
-                           ct.despliegue(MatrizTablero[i+1][j+2]);
-                            
-                            contador++;
-                        }       break;
-                    case 2:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                            
-                            ct.despliegue(MatrizTablero[i][j]);
-                            ct.despliegue(MatrizTablero[i+1][j]);
-                            ct.despliegue(MatrizTablero[i+1][j-1]);
-                            ct.despliegue(MatrizTablero[i][j+1]);
-                            ct.despliegue(MatrizTablero[i-1][j+1]);
-                            ct.despliegue(MatrizTablero[i-1][j+2]);
-                            
-                            contador++;
-                        }       break;
-                    case 3:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                            
-                            ct.despliegue(MatrizTablero[i][j]);
-                            ct.despliegue(MatrizTablero[i-1][j]);
-                            ct.despliegue(MatrizTablero[i][j+1]);
-                            ct.despliegue(MatrizTablero[i][j+2]);
-                            ct.despliegue(MatrizTablero[i][j+3]);
-                            ct.despliegue(MatrizTablero[i+1][j+3]);
-                            
-                            contador++;
-                        }       break;
-                    case 4:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                            
-                            ct.despliegue(MatrizTablero[i][j]);
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i][j-1]);
-                            ct.despliegue(MatrizTablero[i-1][j]);
-                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
                             ct.despliegue(MatrizTablero[i+1][j+1]);
                             ct.despliegue(MatrizTablero[i+1][j+2]);
                             
                             contador++;
                         }       break;
-                    case 5:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-2][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i+2][j-1]);
+                             break;
+                                
+                        }
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i][j+2]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j-2]);
+                              }
+                                break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+2][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i-2][j+1]);
+                              }
+                                break;
+                                
+                        
+                        }   
+                                break;
+                        
+                        
+                        
+                        
+                        
+                    case 2:
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i-1][j+2]);
                             
-                            ct.despliegue(MatrizTablero[i][j]);
+                            
+                                                        
+                        }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j-1]);
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i+1][j]);
+                                    ct.despliegue(MatrizTablero[i+1][j+1]);
+                                    ct.despliegue(MatrizTablero[i+2][j+1]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                                    ct.despliegue(MatrizTablero[i-1][j+1]);
+                                    ct.despliegue(MatrizTablero[i][j-1]);
+                                    ct.despliegue(MatrizTablero[i+1][j-1]);
+                                    ct.despliegue(MatrizTablero[i+1][j-2]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                                    ct.despliegue(MatrizTablero[i-2][j-1]);
+                                    ct.despliegue(MatrizTablero[i-1][j-1]);
+                                    ct.despliegue(MatrizTablero[i-1][j]);
+                                    ct.despliegue(MatrizTablero[i][j+1]);
+                                    ct.despliegue(MatrizTablero[i+1][j+1]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
+                    case 3:
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i][j+2]);
+                            ct.despliegue(MatrizTablero[i+1][j+2]);
+                            
+                            
+                                                        
+                        }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+2][j]);
+                            ct.despliegue(MatrizTablero[i+2][j-1]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j-2]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-2][j]);
+                            ct.despliegue(MatrizTablero[i-2][j+1]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
+                    case 4:
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            
+                            
+                                                        
+                        }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-2][j]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            ct.despliegue(MatrizTablero[i][j+2]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+2][j]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
+                    case 5:
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
                             ct.despliegue(MatrizTablero[i][j+1]);
                             ct.despliegue(MatrizTablero[i][j+2]);
                             ct.despliegue(MatrizTablero[i][j+3]);
+                            
+                            
+                                                        
+                        }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+2][j]);
+                            ct.despliegue(MatrizTablero[i+3][j]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i+1][j]);
                             ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            ct.despliegue(MatrizTablero[i][j-3]);
                             
-                            contador++;
+                            
                         }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-2][j]);
+                            ct.despliegue(MatrizTablero[i-3][j]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
                     case 6:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                            ct = new ControlTerreno ();
-                            ct.despliegue(MatrizTablero[i][j]);
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i][j-1]);
                             ct.despliegue(MatrizTablero[i][j-2]);
                             ct.despliegue(MatrizTablero[i-1][j]);
                             ct.despliegue(MatrizTablero[i-1][j+1]);
                             ct.despliegue(MatrizTablero[i-1][j+2]);
                             
-                            contador++;
-                        }       break;
-                    case 7:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
                             
-                            ct.despliegue(MatrizTablero[i][j]);
+                                                        
+                        }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                  cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-2][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            ct.despliegue(MatrizTablero[i+2][j+1]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                  cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i][j+2]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                  cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i-2][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+2][j]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
+                    case 7:
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j+2]);
+                            
+                            
+                                                        
+                        }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i+2][j-1]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
                             ct.despliegue(MatrizTablero[i+1][j]);
                             ct.despliegue(MatrizTablero[i+1][j+1]);
                             ct.despliegue(MatrizTablero[i][j-1]);
                             ct.despliegue(MatrizTablero[i-1][j-1]);
                             ct.despliegue(MatrizTablero[i-1][j-2]);
                             
-                            contador++;
-                        }       break;
-                    case 8:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
                             
-                            ct.despliegue(MatrizTablero[i][j]);
-                            ct.despliegue(MatrizTablero[i+1][j]);
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i-2][j+1]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
+                    case 8:
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
                             ct.despliegue(MatrizTablero[i][j+1]);
                             ct.despliegue(MatrizTablero[i][j+2]);
-                            ct.despliegue(MatrizTablero[i][j+3]);
-                            ct.despliegue(MatrizTablero[i-1][j+3]);
-                            
-                            contador++;
-                        }       break;
-                    case 9:
-                        if(e.getSource()==MatrizTablero[i][j].boton)
-                        {
-                            
-                            ct.despliegue(MatrizTablero[i][j]);
-                            ct.despliegue(MatrizTablero[i][j-1]);
-                            ct.despliegue(MatrizTablero[i+1][j]);
-                            ct.despliegue(MatrizTablero[i][j+1]);
-                            ct.despliegue(MatrizTablero[i-1][j+1]);
                             ct.despliegue(MatrizTablero[i-1][j+2]);
                             
-                            contador++;
+                            
+                                                        
                         }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+2][j]);
+                            ct.despliegue(MatrizTablero[i+2][j+1]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            ct.despliegue(MatrizTablero[i+1][j-2]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-2][j]);
+                            ct.despliegue(MatrizTablero[i-2][j-1]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
+                        
+                    case 9:
+                        switch (rotado){
+                            case 0:
+                            if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                                cc= new ControlCriatura();
+                            cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i][j-2]);
+                            
+                            
+                                                        
+                        }       break;
+                            case 1:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                   cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i-1][j]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i-2][j]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            
+                            
+                        }       break;
+                            case 2:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+1][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j+1]);
+                            ct.despliegue(MatrizTablero[i][j+1]);
+                            ct.despliegue(MatrizTablero[i][j+2]);
+                            
+                            
+                        }       break;
+                            case 3:
+                                if(e.getSource()==MatrizTablero[i][j].boton){
+                                ct = new ControlTerreno ();
+                            cc= new ControlCriatura();
+                                    cc.invocacion1(MatrizTablero[i][j]);
+                            ct.despliegue(MatrizTablero[i][j-1]);
+                            ct.despliegue(MatrizTablero[i-1][j-1]);
+                            ct.despliegue(MatrizTablero[i+1][j]);
+                            ct.despliegue(MatrizTablero[i+2][j]);
+                            ct.despliegue(MatrizTablero[i+1][j+1]);
+                            
+                           
+                        }       break; 
+                        
+                        
+                                                                                       
+                                } 
+                        
+                        break;
                     default:
                         break;
                 }
@@ -278,13 +716,13 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     public void mostrarCarasObtenidas(int num1,int num2,int num3,int num4){
     
          Dado objImag1 = new Dado();
-         lblDado1.setIcon(objImag1.Imaen(num1));
+         lblDado1.setIcon(objImag1.Dado1(num1));
          Dado objImag2 = new Dado();
-         lblDado2.setIcon(objImag2.Imaen(num2));
+         lblDado2.setIcon(objImag2.Dado1(num2));
          Dado objImag3 = new Dado(); 
-         lblDado3.setIcon(objImag3.Imaen(num3));
+         lblDado3.setIcon(objImag3.Dado1(num3));
          Dado objImag4 = new Dado();
-         lblDado4.setIcon(objImag4.Imaen(num4)); 
+         lblDado4.setIcon(objImag4.Dado1(num4)); 
          
     }
     /**
@@ -297,7 +735,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     private void initComponents() {
 
         TABLERO = new javax.swing.JPanel();
-        Dado11 = new javax.swing.JComboBox<>();
+        BoxDado11 = new javax.swing.JComboBox<>();
         Dado12 = new javax.swing.JComboBox<>();
         Dado13 = new javax.swing.JComboBox<>();
         Dado14 = new javax.swing.JComboBox<>();
@@ -385,8 +823,13 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
         getContentPane().add(TABLERO, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 524, 524));
 
-        Dado11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(Dado11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        BoxDado11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BoxDado11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoxDado11ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BoxDado11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         Dado12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(Dado12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
@@ -869,13 +1312,27 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     }//GEN-LAST:event_BotonDetenerActionPerformed
 
     private void BotonAtacar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAtacar1ActionPerformed
-          
+    cb.realizarAtaque();
     }//GEN-LAST:event_BotonAtacar1ActionPerformed
 
     private void BoxFormaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxFormaActionPerformed
    
     }//GEN-LAST:event_BoxFormaActionPerformed
 
+    private void BoxDado11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxDado11ActionPerformed
+      int listaDados= BoxDado11.getSelectedIndex();
+      
+        switch (listaDados) {
+                    case 0:
+                        if(evt.getSource()==BoxDado11){
+                            
+                            
+                               
+                            }
+                       }
+        
+    }//GEN-LAST:event_BoxDado11ActionPerformed
+                        
     /**
      * @param args the command line arguments
      */
@@ -938,9 +1395,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JComboBox<String> BotonTrampa2;
     private javax.swing.JComboBox<String> BotonTrampa3;
     private javax.swing.JComboBox<String> BotonTrampa4;
+    private javax.swing.JComboBox<String> BoxDado11;
     private javax.swing.JComboBox<String> BoxForma;
     private javax.swing.JComboBox<String> BoxRotar;
-    private javax.swing.JComboBox<String> Dado11;
     private javax.swing.JComboBox<String> Dado12;
     private javax.swing.JComboBox<String> Dado13;
     private javax.swing.JComboBox<String> Dado14;

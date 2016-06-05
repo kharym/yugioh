@@ -10,7 +10,7 @@ public class VPuzleDados extends javax.swing.JDialog implements ActionListener {
 
     ControlPuzleDados cpd;
     
-   String nombreCriatura;
+   
     
     
     

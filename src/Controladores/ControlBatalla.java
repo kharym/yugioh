@@ -7,7 +7,14 @@ public class ControlBatalla {
     
     ControlBatalla cb;
     ControlDado cd;
+    ControlCriatura cc;
     VBatalla vb;
+    
+    int puntosDeVida;
+    
+    boolean monstruo1 = true; 
+    boolean monstruo2 = true;
+    
 
 
     
@@ -55,6 +62,13 @@ public class ControlBatalla {
          vb.mostrarCarasObtenidas(num1,num2,num3,num4);
     }
     
+    public void elegirDado () {
+    
+    
+    
+    
+    }
+    
     public void getNumeroDado(){
         
      cd = new ControlDado();
@@ -62,5 +76,38 @@ public class ControlBatalla {
     
     }
     
-   
+    
+
+    public void realizarAtaque()
+   {
+       
+       
+       do{ 
+       
+       ControlCriatura criatura1= new ControlCriatura();
+       ControlCriatura criatura2= new ControlCriatura();
+       
+       puntosDeVida= criatura1.atacar();
+       
+       criatura2.daño(puntosDeVida);
+       
+       if (criatura2.getPuntosDeVida()<=0){
+           monstruo2 = false;}
+       if (criatura1.getPuntosDeVida()<=0){
+           monstruo1 = false;}
+       
+           
+       
+  
+       
+      puntosDeVida= criatura2.atacar();
+       
+       criatura1.daño(puntosDeVida);
+       
+    
+    }
+       
+       while(monstruo1 && monstruo2);   
+}
+    
 }
