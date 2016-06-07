@@ -13,34 +13,9 @@ import javax.swing.ImageIcon;
 public class ControlTerreno implements ActionListener {
     
     int contador;
-   
- private Posicion[][]MatrizTablero = new Posicion [15][15];
- 
-    public void despliegue(Posicion x )
-    {
-        ImageIcon ICONO;
-        ICONO = null;
-        if(contador%2==0)
-        {   
-            ICONO = new ImageIcon("src\\Imagenes\\amarillo.png");
-            
-        }
-        else
-        {
-            ICONO = new ImageIcon("src\\Imagenes\\rojo.png");
-           
-        }
-        //ICONO = new ImageIcon(ICONO.getImage().getScaledInstance(,-1,java.awt.image.SCALE_DEFAULT)),;//
-        x.boton.setIcon(ICONO);
-        x.boton.removeActionListener(this);
-      
-        }
-    
-    
-    
-  
+     private Posicion[][]MatrizTablero = new Posicion [15][15];
      
-       
+   
         public void actionPerformed(ActionEvent e) {
        
     

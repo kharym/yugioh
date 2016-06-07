@@ -1,8 +1,9 @@
 
 package Controladores;
 
+
 import Modelo.Criatura;
-import Modelo.Dado2;
+import Modelo.DadoB;
 
 import Modelo.Posicion;
 import Vistas.VBatalla;
@@ -14,7 +15,7 @@ import javax.swing.ImageIcon;
 
 
 public class ControlCriatura implements ActionListener {
-     int contador;
+    
      private String nombreCriatura;
      private int puntosDeVida;
      private int ataque;
@@ -29,7 +30,9 @@ public class ControlCriatura implements ActionListener {
      private  String cara4;
      private  String cara5;
      private  String cara6;
-     Dado2 d; 
+     ControlTerreno ct;
+     DadoB d; 
+     int contador;
      
       public ControlCriatura() {
          
@@ -84,12 +87,12 @@ public class ControlCriatura implements ActionListener {
     }
   
    
-     private Posicion[][]MatrizTablero = new Posicion [15][15];
+    
  
     
       
         
-         public void invocacion1 (Posicion x){
+         public void crearCriatura (Posicion x){
           
          ControlCriatura criatura3= new ControlCriatura();
          ControlCriatura criatura4= new ControlCriatura();
@@ -112,17 +115,11 @@ public class ControlCriatura implements ActionListener {
          criatura1.setNombreCriatura("mago oscuro");
          criatura1.setPuntosDeVida(2500); 
          
-        imagenCriatura = null;
-        if(contador%2==0)
-        {   
-        imagenCriatura = new ImageIcon("src\\Imagenes\\mago oscuro.jpg");
-           
-        }
-        x.boton.setIcon(imagenCriatura);
-        x.boton.removeActionListener(this);
         
-        
+       
         }
+       
+        
 
    
         

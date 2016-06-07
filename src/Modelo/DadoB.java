@@ -3,14 +3,14 @@ package Modelo;
 
 import Controladores.ControlCriatura;
 
-public class Dado2 {
+public class DadoB {
     
      public int valorTira; 
      public String cara;
      
      ControlCriatura cc;
      
-     public String Dado1 (int vDados){
+     public String Dado1 (int vDados){ //mago Oscuro
         
         switch (vDados){
             
@@ -23,7 +23,8 @@ public class Dado2 {
             case 4: cara = new String ("mag");
             break;
             case 5: cara = new String ("inv");
-            
+            break;
+            case 6: cara = new String ("inv");
          
             break;
             
@@ -31,7 +32,7 @@ public class Dado2 {
         }
     
     return cara; 
-    
+ 
      }
 }
 

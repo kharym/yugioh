@@ -14,7 +14,7 @@ public int valorTira;
 public int calcularnumero (){ 
         
     Random Generar = new Random(); 
-    valorTira = Generar.nextInt(5)+1;
+    valorTira = Generar.nextInt(6)+1;
     
     return valorTira; 
     
