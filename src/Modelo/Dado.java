@@ -19,15 +19,15 @@ public class Dado {
         
         switch (vDados){
             
-            case 1: cara = new ImageIcon("src\\Imagenes\\1.png");
+            case 1: cara = new ImageIcon("src\\Imagenes\\mov.png");
             break;
-            case 2: cara = new ImageIcon("src\\Imagenes\\2.png");
+            case 2: cara = new ImageIcon("src\\Imagenes\\atk.png");
             break;
-            case 3: cara = new ImageIcon("src\\Imagenes\\3.png");
+            case 3: cara = new ImageIcon("src\\Imagenes\\tramp.png");
             break;
-            case 4: cara = new ImageIcon("src\\Imagenes\\4.png");
+            case 4: cara = new ImageIcon("src\\Imagenes\\mag.png");
             break;
-            case 5: cara = new ImageIcon("src\\Imagenes\\5.png"); 
+            case 5: cara = new ImageIcon("src\\Imagenes\\inv.png"); 
                     cc = new ControlCriatura();
                   
                    
