@@ -2378,18 +2378,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     
    
           
-    
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-   
-            for(int i=0; i<15;i++) // recorrer columnas 
-            {
-            for(int j=0; j<15;j++) // recorrer filas
-            {
-           
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida1)){ //mago oscuro
-                    System.out.println("cara obtenida es igual a "+caraObtenida1);
+    public void subActionPerformed1(int i ,int j, ActionEvent e)//mago oscuro
+    {
+        System.out.println("cara obtenida es igual a "+caraObtenida1);
                     System.out.println("salió inovocación...elija posición de invocación"); 
                     System.out.println("invoco al mago oscuro");
                     System.out.println("Se presionó: "+i+","+j);
@@ -2936,13 +2927,13 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             break;
                         default: 
                         }
-                }
         
-           
-                               
-           
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida2)){
-                    System.out.println("cara obtenida es igual a "+caraObtenida2);
+    }
+
+    
+    public void subActionPerformed2(int i ,int j, ActionEvent e)//goblin 
+    {
+        System.out.println("cara obtenida es igual a "+caraObtenida2);
                     System.out.println("salió inovocación...elija posición de invocación");            // goblin
                     System.out.println("invoco a goblin");
                     System.out.println("Se presionó: "+i+","+j);
@@ -3489,12 +3480,12 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             break;
                         default: 
                         }
-                }
-            
-            
-        
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
-                    System.out.println("cara obtenida es igual a "+caraObtenida3);
+    }
+    
+    
+    public void subActionPerformed3(int i,int j, ActionEvent e)//orco
+    {
+         System.out.println("cara obtenida es igual a "+caraObtenida3);
                     System.out.println("salió inovocación...elija posición de invocación");      // orco
                     System.out.println("invoco a orco");
                     System.out.println("Se presionó: "+i+","+j);
@@ -4041,10 +4032,12 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             break;
                         default: 
                         }
-                }
+    }
     
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
-                    System.out.println("salió inovocación...elija posición de invocación"); // pikachu
+    
+    public void subActionPerformed4(int i, int j, ActionEvent e)//pikachu
+    {
+        System.out.println("salió inovocación...elija posición de invocación"); // pikachu
                     System.out.println("invoco a pikachu");
                     System.out.println("Se presionó: "+i+","+j);
                 
@@ -4590,12 +4583,10 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             break;
                         default: 
                         }
-                }
-            
-   
+               }
            
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){// kuriboh
-                    System.out.println("salió inovocación...elija posición de invocación");
+    public void subActionPerformed5(int i, int j, ActionEvent e)//kuriboh
+     {System.out.println("salió inovocación...elija posición de invocación");
                     System.out.println("invoco a kuriboh");
                     System.out.println("Se presionó: "+i+","+j);
                 
@@ -5143,8 +5134,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         }
                 }
      
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
-                    System.out.println("salió inovocación...elija posición de invocación");            // agumon
+    public void subActionPerformed6(int i, int j, ActionEvent e)//agumon 
+    { System.out.println("salió inovocación...elija posición de invocación");            // agumon
                     System.out.println("invoco a agumon");
                     System.out.println("Se presionó: "+i+","+j);
                 
@@ -5691,11 +5682,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         default: 
                         }
                 }
- 
-        
-           
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
-                    System.out.println("salió inovocación...elija posición de invocación");      // dboa
+    
+    public void subActionPerformed7(int i, int j, ActionEvent e) //dboa
+    { System.out.println("salió inovocación...elija posición de invocación");      // dboa
                     System.out.println("invoco al dragón blanco de ojos azules");
                     System.out.println("Se presionó: "+i+","+j);
                 
@@ -6242,12 +6231,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         default: 
                         }
                 }
-          
- 
-        
-           
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
-                    System.out.println("salió inovocación...elija posición de invocación"); // metabee
+    
+    public void subActionPerformed8(int i, int j, ActionEvent e)//metabee
+    {System.out.println("salió inovocación...elija posición de invocación"); // metabee
                     System.out.println("invoco a metabee");
                     System.out.println("Se presionó: "+i+","+j);
                 
@@ -6794,11 +6780,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         default: 
                         }
                 }
-                
-               
-                
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida9)){ //mago del tiempo
-                    System.out.println("cara obtenida es igual a "+caraObtenida9);
+    
+    public void subActionPerformed9(int i, int j, ActionEvent e) //mago del tiempo
+    { System.out.println("cara obtenida es igual a "+caraObtenida9);
                     System.out.println("salió inovocación...elija posición de invocación"); 
                     System.out.println("invoco al mago deltiempo");
                     System.out.println("Se presionó: "+i+","+j);
@@ -7387,12 +7371,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         default: 
                         }
                 }
-        
-           
-                               
-           
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida10)){
-                    System.out.println("cara obtenida es igual a "+caraObtenida10);
+    
+    public void subActionPerformed10(int i, int j, ActionEvent e)
+    {System.out.println("cara obtenida es igual a "+caraObtenida10);
                     System.out.println("salió inovocación...elija posición de invocación");            // guardian celta
                     System.out.println("invoco al guardián celta");
                     System.out.println("Se presionó: "+i+","+j);
@@ -7980,6 +7961,80 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             break;
                         default: 
                         }
+                }
+    
+    public void subActionPerformed11(int i, int j, ActionEvent e)
+    {}
+    
+    public void subActionPerformed12(int i, int j, ActionEvent e)
+    {}
+    
+    public void subActionPerformed13(int i, int j, ActionEvent e)
+    {}
+    
+    public void subActionPerformed14(int i, int j, ActionEvent e)
+    {}
+    
+    public void subActionPerformed15(int i, int j, ActionEvent e)
+    {}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+   
+            for(int i=0; i<15;i++) // recorrer columnas 
+            {
+            for(int j=0; j<15;j++) // recorrer filas
+            {
+           
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida1)){ //mago oscuro
+                    subActionPerformed1(i,j,e);
+                }
+                   
+           
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida2)){//goblin
+                    subActionPerformed2(i,j,e);
+                }
+            
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){//orco
+                    subActionPerformed3(i,j,e);
+                   
+                }
+    
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){//pikachu
+                     subActionPerformed4(i,j,e);
+                    
+                }
+
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){// kuriboh 
+                    subActionPerformed5(i,j,e);
+                }
+                    
+     
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){//agumon
+                    subActionPerformed6(i,j,e);
+                }
+
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){ // dboa
+                    subActionPerformed7(i,j,e);
+                }
+ 
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){       // metabee             
+                subActionPerformed8(i,j,e);
+                    
+                }
+               
+                
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida9)){ //mago del tiempo
+                   subActionPerformed9(i,j,e);
+ 
+                }
+        
+           
+                               
+           
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida10)){// guardian celta
+                    
+                     subActionPerformed9(i,j,e);
+                     
                 }
             
             
@@ -10940,6 +10995,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         }
                 }
           
+   
         
         if (!"inv".equals(caraObtenida1)){
  
@@ -11057,15 +11113,13 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         MatrizTablero[i][j].boton.removeActionListener(this);
   
         }
+            }}
+    }
    
-       
+    
     
             
-            }
-  
-       }
-    }
-        
+       
         
        
  
@@ -11684,14 +11738,14 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         lblDado5.setName(""); // NOI18N
         lblDado5.setOpaque(true);
         lblDado5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(lblDado5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 600, 110, 30));
+        getContentPane().add(lblDado5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 570, 110, 30));
 
         lblDado1.setBackground(new java.awt.Color(255, 255, 0));
         lblDado1.setFont(new java.awt.Font("Engravers MT", 3, 14)); // NOI18N
         lblDado1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         lblDado1.setName(""); // NOI18N
         lblDado1.setOpaque(true);
-        getContentPane().add(lblDado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, 110, 60));
+        getContentPane().add(lblDado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 610, 110, 60));
 
         BotonDetener4.setFont(new java.awt.Font("Engravers MT", 1, 10)); // NOI18N
         BotonDetener4.setForeground(new java.awt.Color(102, 102, 0));
@@ -12449,5 +12503,7 @@ public Posicion[][] getMatrizTablero() {
     }
 
      
-
 }
+
+
+
