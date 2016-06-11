@@ -116,6 +116,7 @@ public class VPuzleDados extends javax.swing.JDialog implements ActionListener {
 
     private void botonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOkActionPerformed
     cpd.Confirmar();
+    
     }//GEN-LAST:event_botonOkActionPerformed
 
     /**

@@ -29,6 +29,8 @@ public class ControlPuzleDados {
     
     cb = new ControlBatalla();
     cb.mostrarBatalla();
+    cb.indicarTurno();
+       
     vpd.dispose();
     
     }

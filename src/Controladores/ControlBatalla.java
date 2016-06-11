@@ -13,6 +13,12 @@ public class ControlBatalla {
     ControlAccion ca;
     
     
+    int turno = 1;
+
+ public String Jugador1 = "Amarillo";
+ public String Jugador2 = "Rojo";
+ public String Jugador3 = "Azul";
+    
     int puntosDeVida;
     
     boolean monstruo1 = true; 
@@ -27,6 +33,7 @@ public class ControlBatalla {
     
       vb = new VBatalla(this);
       vb.setVisible(true);
+      vb.despliegueJefeDeTerrenos();
       
     }
     
@@ -278,7 +285,82 @@ public class ControlBatalla {
        while(monstruo1 && monstruo2);   
 }
     
+   
+
+ 
+
+ 
+    public String getJugador1() {
+        return Jugador1;
+    }
+
+    public void setJugador1(String Jugador1) {
+        this.Jugador1 = Jugador1;
+    }
+
+    public String getJugador2() {
+        return Jugador2;
+    }
+
+    public void setJugador2(String Jugador2) {
+        this.Jugador2 = Jugador2;
+    }
+
+    public String getJugador3() {
+        return Jugador3;
+    }
+
+    public void setJugador3(String Jugador3) {
+        this.Jugador3 = Jugador3;
+    }
+
+    public String getJugador4() {
+        return Jugador4;
+    }
+
+    public void setJugador4(String Jugador4) {
+        this.Jugador4 = Jugador4;
+    }
+ public String Jugador4 = "Verde";
     
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+
+    public void indicarTurno(){
+    
+     if(getTurno()==1){
+                
+                System.out.println("Le toca al JUGADOR Amarillo: Elija sus Dados");
+                
+                
+    
+     
+     }else{
+                
+                System.out.println("Le toca al JUGADOR Rojo: Elija sus Dados");       
+    }
+    
+}  
+    //Regresa El Caracter De Tipo String.
+    public String obtenerJugador(){
+        
+        
+        if(getTurno()==1){
+                
+                return Jugador1;
+                
+        }else{
+                
+                return Jugador2;      
+    }
+    }
+  
   
     
 }
