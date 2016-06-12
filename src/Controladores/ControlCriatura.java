@@ -30,7 +30,7 @@ public class ControlCriatura implements ActionListener {
      private  String cara4;
      private  String cara5;
      private  String cara6;
-     ControlTerreno ct;
+    
      DadoB d; 
      int contador;
      

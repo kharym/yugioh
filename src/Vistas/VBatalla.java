@@ -2,17 +2,22 @@
 package Vistas;
 import Controladores.ControlBatalla;
 import Controladores.ControlDado;
-import Controladores.ControlTerreno;
+
 import Controladores.ControlCriatura;
 import Controladores.ControlPuzleDados;
 import Controladores.ControlAccion;
 import Controladores.ControlTurno;
+
 import Modelo.Posicion;
+import Modelo.Criatura;
 import Modelo.DadoB;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+
+import java.awt.Color;
+import javax.swing.Icon;
 
 import javax.swing.JFrame;
 
@@ -21,7 +26,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     
     ControlBatalla cb;
     ControlDado cd;
-    ControlTerreno ct;
+   
     ControlCriatura cc;
     ControlPuzleDados cpd;
     ControlAccion ca;
@@ -39,6 +44,14 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     int auxTramp = 0; 
     int contadorMag=1;
     int auxMag = 0; 
+    boolean uso = false;
+    
+  
+    String terreno;
+    String numerocd="terreno";
+    
+    ImageIcon imagenCriatura;
+    String Criatura;
     String caraObtenida1;
     String caraObtenida2; 
     String caraObtenida3; 
@@ -67,15 +80,19 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
           {
             for(int j=0; j<15;j++) // recorrer filas
             {
-                MatrizTablero[i][j]= new Posicion (String.valueOf((i+1)+15*j)); // instanciacion de cada elemento del objeto matriztablero 
+                MatrizTablero[i][j]= new Posicion (null); // instanciacion de cada elemento del objeto matriztablero 
              
-                MatrizTablero[i][j].boton.setBounds(i*35, j*35, 34, 34);
+                MatrizTablero[i][j].boton.setBounds(i*100, j*35, 100, 34);
                 
                 this.TABLERO.add(MatrizTablero[i][j].boton);
                 
                 MatrizTablero[i][j].boton.setEnabled(false);
                
-            
+               
+              terreno = null;
+               
+               MatrizTablero[i][j].boton.setText(terreno);
+
                 BotonDetener.setEnabled(false);
                 BotonDetener1.setEnabled(false);
                 BotonDetener2.setEnabled(false);
@@ -111,7 +128,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                 BotonAtacar3.setEnabled(false);
                 BotonAtacar4.setEnabled(false);
                 BotonMover1.setEnabled(false);
-                BotonMover2.setEnabled(false);
+                
+               
                 BotonMover3.setEnabled(false);
                 BotonMover4.setEnabled(false);
                 Dado21.setEnabled(false);
@@ -138,25 +156,25 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     
     
     public void despliegue(Posicion x) {
-       
-      
-            ImageIcon ImagenDespliegue;
-            
-            ImagenDespliegue = null;
-        
-            ImagenDespliegue = new ImageIcon("src\\Imagenes\\amarillo.png");
-    
-            x.boton.setIcon(ImagenDespliegue);
-            x.boton.removeActionListener(this);
+ 
+            x.boton.setBackground(Color.yellow);
             
              for(int i=0; i<15;i++) // recorrer columnas 
-        {
+            {
             for(int j=0; j<15;j++) // recorrer filas
             {
-            MatrizTablero[i][j].boton.removeActionListener(this);
+           
+         MatrizTablero[i][j].boton.removeActionListener(this);
+         
+         terreno= "ocupado";
+         
+         x.boton.setText(String.valueOf(terreno));
+
+         terreno= (x.boton.getText());
             
             }
-        }
+          }
+          
     }
     
     public void despliegueJefeDeTerrenos(){
@@ -191,29 +209,47 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     
     public void invocacion1 (Posicion x){  //mago oscuro
         
-     
-            ImageIcon imagenCriatura;
+            
+          Criatura criatura1 = new Criatura();          
        
+          x.boton.setText((criatura1.Criaturas(1)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+         
             imagenCriatura = null;
       
             imagenCriatura = new ImageIcon("src\\Imagenes\\mago oscuro.jpg");
        
-            x.boton.setIcon(imagenCriatura);
-         
-            x.boton.removeActionListener(this);
-              for(int i=0; i<15;i++) // recorrer columnas 
-        {
+        x.boton.setIcon(imagenCriatura);
+        
+        for(int i=0; i<15;i++) // recorrer columnas 
+            {
             for(int j=0; j<15;j++) // recorrer filas
             {
-            MatrizTablero[i][j].boton.removeActionListener(this);
+           
+         MatrizTablero[i][j].boton.addActionListener(this);
+         
+         
             }
-        }
+          }
+         caraObtenida1 = null;
+         
     }
      
     public void invocacion2 (Posicion x){ //goblin
         
+         Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(2)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -230,12 +266,21 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            
+            caraObtenida2 = null;
     }
       
      public void invocacion3 (Posicion x){   //orco
         
+        Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(3)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -250,13 +295,22 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
+            
         }
+            caraObtenida3 = null;
     }
        
       public void invocacion4 (Posicion x){      //pikachu
         
+       Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(4)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -273,11 +327,19 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida4 = null;
     }
     public void invocacion5 (Posicion x){  // kuriboh
         
+       Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(5)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -294,12 +356,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida5 = null;
     }
      
     public void invocacion6 (Posicion x){ // agumon
         
-      
-            ImageIcon imagenCriatura;
+      Criatura criatura1 = new Criatura();          
+       
+          x.boton.setText((criatura1.Criaturas(6)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+          
        
             imagenCriatura = null;
       
@@ -316,12 +386,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+             caraObtenida6 = null;
     }
       
      public void invocacion7 (Posicion x){   // dboa
         
+       Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(7)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -338,12 +416,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida7 = null;
     }
        
       public void invocacion8 (Posicion x){      // metabee
         
+       Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(8)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -360,12 +446,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida8 = null;
     }
       
       public void invocacion9 (Posicion x){  //mago del tiempo
         
      
-            ImageIcon imagenCriatura;
+           Criatura criatura1 = new Criatura();          
+       
+          x.boton.setText((criatura1.Criaturas(9)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
        
             imagenCriatura = null;
       
@@ -381,12 +475,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+              caraObtenida9 = null;
     }
      
     public void invocacion10 (Posicion x){ //guardian celta 
         
+       Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(10)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -403,12 +505,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida10 = null;
     }
       
      public void invocacion11 (Posicion x){   // charizard
         
+       Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(11)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+            
        
             imagenCriatura = null;
       
@@ -424,12 +534,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida11 = null;
     }
        
       public void invocacion12 (Posicion x){      // maga oscura
         
+       Criatura criatura1 = new Criatura();          
        
-            ImageIcon imagenCriatura;
+          x.boton.setText((criatura1.Criaturas(12)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
+           
        
             imagenCriatura = null;
       
@@ -446,11 +564,19 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida12 = null;
     }
     public void invocacion13 (Posicion x){  // slifer
         
        
-            ImageIcon imagenCriatura;
+            Criatura criatura1 = new Criatura();          
+       
+          x.boton.setText((criatura1.Criaturas(13)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
        
             imagenCriatura = null;
       
@@ -467,12 +593,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida13 = null;
     }
      
     public void invocacion14 (Posicion x){ // mewtwo
-        
+        Criatura criatura1 = new Criatura();          
+       
+          x.boton.setText((criatura1.Criaturas(14)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
       
-            ImageIcon imagenCriatura;
+            
        
             imagenCriatura = null;
       
@@ -489,12 +623,20 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+             caraObtenida14 = null;
     }
       
      public void invocacion15 (Posicion x){   // garurumon 
         
        
-            ImageIcon imagenCriatura;
+            Criatura criatura1 = new Criatura();          
+       
+          x.boton.setText((criatura1.Criaturas(15)));
+          
+         
+          x.boton.setBackground(Color.yellow);
+   
+         terreno = (x.boton.getText());
        
             imagenCriatura = null;
       
@@ -511,6 +653,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             MatrizTablero[i][j].boton.removeActionListener(this);
             }
         }
+            caraObtenida15 = null;
     }
         
     public void mostrarCarasObtenidas(int num1){ //mago Oscuro
@@ -543,6 +686,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               
+               BotonMover1.setEnabled(true);
         
         }
         else if ( "atk".equals(caraObtenida1)){
@@ -675,6 +820,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+                BotonMover1.setEnabled(true);
+                 
         }
                 else if ( "atk".equals(caraObtenida2)){
            
@@ -802,6 +949,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida3)){
            
@@ -929,6 +1077,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida4)){
            
@@ -1041,6 +1190,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             imagenmov = new ImageIcon("src\\Imagenes\\mov.png");
        
             lblDado1.setIcon(imagenmov);
+            
            for(int i=0; i<15;i++) // recorrer columnas 
         {
             for(int j=0; j<15;j++) // recorrer filas
@@ -1056,6 +1206,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
             
         }
         else if ( "atk".equals(caraObtenida5)){
@@ -1153,6 +1304,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
          
         
         BotonDetener4.setEnabled(false);
+        BotonMover1.setEnabled(true);
     }
     
     public void mostrarCarasObtenidas5(int num1){  // agumon
@@ -1187,6 +1339,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida6)){
            
@@ -1315,6 +1468,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida7)){
            
@@ -1442,6 +1596,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida8)){
            
@@ -1570,6 +1725,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         
         }
         else if ( "atk".equals(caraObtenida9)){
@@ -1702,6 +1858,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
        else  if ( "atk".equals(caraObtenida10)){
            
@@ -1829,6 +1986,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
        else  if ( "atk".equals(caraObtenida11)){
            
@@ -1954,6 +2112,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida12)){
            
@@ -2081,6 +2240,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
             
         }
         else if ( "atk".equals(caraObtenida13)){
@@ -2212,6 +2372,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida14)){
            
@@ -2340,6 +2501,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
 
             
                jlabelmov1.setText(String.valueOf(auxMov));
+               BotonMover1.setEnabled(true);
         }
         else if ( "atk".equals(caraObtenida15)){
            
@@ -2437,9 +2599,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         
         BotonDetener14.setEnabled(false);
     }
-    
-   
-          
+     
     public void subActionPerformed1(int i ,int j, ActionEvent e)//mago oscuro
     {
         System.out.println("cara obtenida es igual a "+caraObtenida1);
@@ -2455,10 +2615,12 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida1)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida1) && MatrizTablero[i][j].boton.getText()==null && !"1".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion1(MatrizTablero[i][j]);
+                                    
+                                   
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2469,9 +2631,10 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 
                                     case 1:
                                         
-                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(lblDado5.getText()) && terreno==null /**&& !"1".equals(terreno)**/){
                               
                                     invocacion1(MatrizTablero[i][j]);
+                                  
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -2485,6 +2648,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                               
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2497,6 +2661,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                             
                                    invocacion1(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2517,6 +2682,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -2529,7 +2695,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     case 1:
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
-                                    invocacion1(MatrizTablero[i][j]);    
+                                    invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -2544,6 +2711,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                             
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -2556,6 +2724,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2575,6 +2744,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                             
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -2587,6 +2757,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                             
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -2599,6 +2770,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -2611,6 +2783,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
                                    invocacion1(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -2629,6 +2802,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                              
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2641,6 +2815,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -2654,6 +2829,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -2666,6 +2842,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -2683,6 +2860,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -2695,6 +2873,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -2705,7 +2884,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
+                                    
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2718,6 +2899,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -2735,6 +2917,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2747,6 +2930,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -2759,6 +2943,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -2770,6 +2955,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -2786,6 +2972,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -2798,6 +2985,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2810,6 +2998,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -2822,6 +3011,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -2838,6 +3028,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton   && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2850,6 +3041,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -2862,6 +3054,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -2874,6 +3067,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -2890,6 +3084,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -2902,6 +3097,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -2914,6 +3110,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -2926,6 +3123,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -2942,6 +3140,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                    invocacion1(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -2954,6 +3153,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                    invocacion1(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -2966,6 +3166,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -2978,6 +3179,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida1)){
                                 
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3008,10 +3210,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2) ){
+                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2) && MatrizTablero[i][j].boton.getText()==null && !"2".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText()) ){
                                     
                                    
                                     invocacion2(MatrizTablero[i][j]);
+                                    
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3025,6 +3228,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                               
                                     invocacion2(MatrizTablero[i][j]);
+                                  
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -3038,6 +3242,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                               
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3050,6 +3255,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                             
                                    invocacion2(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3070,6 +3276,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3082,7 +3289,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     case 1:
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
-                                    invocacion2(MatrizTablero[i][j]);    
+                                    invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3097,6 +3305,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                             
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3109,6 +3318,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3128,6 +3338,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                             
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -3140,6 +3351,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                             
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3152,6 +3364,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3164,6 +3377,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
                                    invocacion2(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -3182,6 +3396,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                              
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3194,6 +3409,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3207,6 +3423,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3219,6 +3436,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3236,6 +3454,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -3248,6 +3467,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3258,7 +3478,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
-                                    invocacion2(MatrizTablero[i][j]);;
+                                    invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3271,6 +3492,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -3288,6 +3510,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3300,6 +3523,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3312,6 +3536,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3323,6 +3548,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3339,6 +3565,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3351,6 +3578,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3363,6 +3591,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -3375,6 +3604,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -3391,6 +3621,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3403,6 +3634,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3415,6 +3647,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3427,6 +3660,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3443,6 +3677,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3455,6 +3690,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3467,6 +3703,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -3479,6 +3716,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3495,6 +3733,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                    invocacion2(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -3507,6 +3746,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                    invocacion2(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -3519,6 +3759,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -3531,6 +3772,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida2)){
                                 
                                     invocacion2(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3560,10 +3802,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida3)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida3)&& MatrizTablero[i][j].boton.getText()==null && !"3".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion3(MatrizTablero[i][j]);
+                                   
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3577,6 +3820,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida3)){
                               
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -3590,6 +3834,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida3)){
                               
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3602,6 +3847,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                             
                                    invocacion3(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3622,6 +3868,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3635,6 +3882,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                     invocacion3(MatrizTablero[i][j]);    
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3649,6 +3897,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                             
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3661,6 +3910,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3680,6 +3930,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                             
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -3692,6 +3943,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                             
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3704,6 +3956,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3716,6 +3969,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                    invocacion3(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -3734,6 +3988,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                              
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3746,6 +4001,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3759,6 +4015,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3771,6 +4028,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3788,6 +4046,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -3800,6 +4059,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3811,6 +4071,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3823,6 +4084,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -3840,6 +4102,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3852,6 +4115,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3864,6 +4128,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3875,6 +4140,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3891,6 +4157,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3903,6 +4170,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3915,6 +4183,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -3927,6 +4196,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -3943,6 +4213,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -3955,6 +4226,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -3967,6 +4239,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -3979,6 +4252,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -3995,6 +4269,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4007,6 +4282,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4019,6 +4295,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -4031,6 +4308,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4047,6 +4325,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                    invocacion3(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -4059,6 +4338,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                    invocacion3(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -4071,6 +4351,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -4083,6 +4364,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){
                                 
                                     invocacion3(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4111,10 +4393,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4) && MatrizTablero[i][j].boton.getText()==null && !"4".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion4(MatrizTablero[i][j]);
+                                    
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4128,6 +4411,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                               
                                     invocacion4(MatrizTablero[i][j]);
+                                 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -4141,6 +4425,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                               
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4153,6 +4438,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                             
                                    invocacion4(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4173,6 +4459,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4185,7 +4472,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     case 1:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
-                                    invocacion4(MatrizTablero[i][j]);    
+                                    invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4200,6 +4488,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                             
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4212,6 +4501,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4231,6 +4521,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                             
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -4243,6 +4534,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                             
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4255,6 +4547,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4267,6 +4560,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
                                    invocacion4(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -4285,6 +4579,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                              
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4297,6 +4592,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4310,6 +4606,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4322,6 +4619,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4339,6 +4637,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -4351,6 +4650,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4362,6 +4662,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4374,6 +4675,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -4391,6 +4693,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4415,6 +4718,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4426,6 +4730,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4442,6 +4747,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4454,6 +4760,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4466,6 +4773,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -4478,6 +4786,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -4494,6 +4803,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4506,6 +4816,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4518,6 +4829,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4530,6 +4842,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4546,6 +4859,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4558,6 +4872,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4570,6 +4885,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -4582,6 +4898,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4598,6 +4915,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                    invocacion4(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -4610,6 +4928,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                    invocacion4(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -4622,6 +4941,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -4634,6 +4954,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){
                                 
                                     invocacion4(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4660,10 +4981,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)&& MatrizTablero[i][j].boton.getText()==null && !"5".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion5(MatrizTablero[i][j]);
+                                 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4677,6 +4999,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                               
                                     invocacion1(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -4690,6 +5013,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                               
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4702,6 +5026,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                             
                                    invocacion5(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4722,6 +5047,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4734,7 +5060,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     case 1:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
-                                    invocacion5(MatrizTablero[i][j]);    
+                                    invocacion5(MatrizTablero[i][j]); 
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4749,6 +5076,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                             
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4761,6 +5089,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4780,6 +5109,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                             
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -4792,6 +5122,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                             
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4804,6 +5135,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4816,6 +5148,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
                                    invocacion5(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -4834,6 +5167,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                              
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4846,6 +5180,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4859,6 +5194,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4871,6 +5207,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4888,6 +5225,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -4900,6 +5238,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4911,6 +5250,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4923,6 +5263,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -4940,6 +5281,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -4952,6 +5294,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -4964,6 +5307,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -4975,6 +5319,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -4991,6 +5336,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5003,6 +5349,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5015,6 +5362,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -5027,6 +5375,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -5043,6 +5392,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5055,6 +5405,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5067,6 +5418,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5079,6 +5431,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5095,6 +5448,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5107,6 +5461,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5119,6 +5474,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -5131,6 +5487,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5147,6 +5504,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                    invocacion5(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -5159,6 +5517,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                    invocacion5(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -5171,6 +5530,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -5183,6 +5543,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){
                                 
                                     invocacion5(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5209,10 +5570,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6) && MatrizTablero[i][j].boton.getText()==null && !"6".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion6(MatrizTablero[i][j]);
+                                   
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5226,6 +5588,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                               
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -5239,6 +5602,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                               
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5251,6 +5615,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                             
                                    invocacion6(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5271,6 +5636,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5284,6 +5650,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                     invocacion6(MatrizTablero[i][j]);    
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5298,6 +5665,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                             
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5310,6 +5678,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5329,6 +5698,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                             
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -5341,6 +5711,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                             
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5353,6 +5724,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5365,6 +5737,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                    invocacion6(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -5383,6 +5756,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                              
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5395,6 +5769,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5408,6 +5783,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5420,6 +5796,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5437,6 +5814,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -5449,6 +5827,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5460,6 +5839,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5472,6 +5852,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -5489,6 +5870,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5501,6 +5883,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5513,6 +5896,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5524,6 +5908,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5540,6 +5925,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5552,6 +5938,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5564,6 +5951,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -5576,6 +5964,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -5592,6 +5981,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5604,6 +5994,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5616,6 +6007,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5628,6 +6020,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5644,6 +6037,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5656,6 +6050,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5668,6 +6063,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -5680,6 +6076,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5696,6 +6093,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                    invocacion6(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -5708,6 +6106,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                    invocacion6(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -5720,6 +6119,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -5732,6 +6132,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){
                                 
                                     invocacion6(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5758,10 +6159,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7) && MatrizTablero[i][j].boton.getText()==null && !"7".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion7(MatrizTablero[i][j]);
+                                   
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5775,6 +6177,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                               
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -5788,6 +6191,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                               
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5800,6 +6204,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                             
                                    invocacion7(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5820,6 +6225,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5832,7 +6238,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     case 1:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
-                                    invocacion7(MatrizTablero[i][j]);    
+                                    invocacion7(MatrizTablero[i][j]);   
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5847,6 +6254,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                             
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5859,6 +6267,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5878,6 +6287,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                             
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -5890,6 +6300,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                             
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5902,6 +6313,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5914,6 +6326,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
                                    invocacion7(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -5932,6 +6345,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                              
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -5944,6 +6358,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -5957,6 +6372,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -5969,6 +6385,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -5986,6 +6403,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -5998,6 +6416,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6008,7 +6427,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                             
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
-                                    invocacion7(MatrizTablero[i][j]);;
+                                    invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6021,6 +6441,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -6038,6 +6459,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6050,6 +6472,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6062,6 +6485,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6073,6 +6497,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6089,6 +6514,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6101,6 +6527,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6113,6 +6540,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -6125,6 +6553,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -6141,6 +6570,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6153,6 +6583,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6165,6 +6596,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6177,6 +6609,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6193,6 +6626,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6205,6 +6639,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6217,6 +6652,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -6229,6 +6665,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6245,6 +6682,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                    invocacion7(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -6257,6 +6695,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                    invocacion7(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -6269,6 +6708,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -6281,6 +6721,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){
                                 
                                     invocacion7(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6307,10 +6748,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8) && MatrizTablero[i][j].boton.getText()==null && !"8".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion8(MatrizTablero[i][j]);
+                                  
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6324,6 +6766,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                               
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -6337,6 +6780,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                               
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6349,6 +6793,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                             
                                    invocacion8(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6369,6 +6814,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6381,7 +6827,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     case 1:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
-                                    invocacion8(MatrizTablero[i][j]);    
+                                    invocacion8(MatrizTablero[i][j]);   
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6396,6 +6843,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                             
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6408,6 +6856,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6427,6 +6876,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                             
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -6439,6 +6889,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                             
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6451,6 +6902,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6463,6 +6915,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
                                    invocacion8(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -6481,6 +6934,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                              
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6493,6 +6947,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6506,6 +6961,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6518,6 +6974,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6535,6 +6992,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -6547,6 +7005,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6558,6 +7017,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 2:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6570,6 +7030,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -6587,6 +7048,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6599,6 +7061,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6611,6 +7074,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6622,6 +7086,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 case 3:
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6638,6 +7103,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6650,6 +7116,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6662,6 +7129,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -6674,6 +7142,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -6690,6 +7159,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                  if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6702,6 +7172,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6714,6 +7185,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6726,6 +7198,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6742,6 +7215,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6754,6 +7228,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6766,6 +7241,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -6778,6 +7254,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6794,6 +7271,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                    invocacion8(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -6806,6 +7284,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                    invocacion8(MatrizTablero[i][j]);
+                                   despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -6818,6 +7297,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -6830,6 +7310,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){
                                 
                                     invocacion8(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6857,10 +7338,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                 
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida9)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida9) && MatrizTablero[i][j].boton.getText()==null && !"9".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                   
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6875,6 +7357,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -6889,6 +7372,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6902,6 +7386,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6923,6 +7408,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -6936,7 +7422,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida9)){
                                     
                                    
-                                    invocacion9(MatrizTablero[i][j]);    
+                                    invocacion9(MatrizTablero[i][j]); 
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -6952,6 +7439,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -6965,6 +7453,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -6985,6 +7474,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -6998,6 +7488,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7011,6 +7502,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7024,6 +7516,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -7043,6 +7536,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7056,6 +7550,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7070,6 +7565,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7083,6 +7579,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7101,6 +7598,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -7114,6 +7612,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7127,6 +7626,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7140,6 +7640,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -7158,6 +7659,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7171,6 +7673,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7184,6 +7687,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7197,6 +7701,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7214,6 +7719,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7227,6 +7733,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7240,6 +7747,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -7253,6 +7761,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -7270,6 +7779,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7283,6 +7793,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7296,6 +7807,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7309,6 +7821,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7326,6 +7839,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7339,6 +7853,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7352,6 +7867,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -7365,6 +7881,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7382,6 +7899,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -7395,6 +7913,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -7408,6 +7927,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -7421,6 +7941,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion9(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7435,7 +7956,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                 }
     
     public void subActionPerformed10(int i, int j, ActionEvent e) // guardian celta
-    {System.out.println("cara obtenida es igual a "+caraObtenida10);
+   {System.out.println("cara obtenida es igual a "+caraObtenida10);
                     System.out.println("salió inovocación...elija posición de invocación");            // guardian celta
                     System.out.println("invoco al guardián celta");
                     System.out.println("Se presionó: "+i+","+j);
@@ -7448,10 +7969,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida10) ){
+                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida10)&& MatrizTablero[i][j].boton.getText()==null && !"10".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText()) ){
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7466,6 +7988,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -7480,6 +8003,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7493,6 +8017,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7514,6 +8039,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7527,7 +8053,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida10) ){
                                     
                                    
-                                    invocacion10(MatrizTablero[i][j]);    
+                                    invocacion10(MatrizTablero[i][j]);   
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7543,6 +8070,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7556,6 +8084,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7576,6 +8105,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -7589,6 +8119,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7602,6 +8133,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7615,6 +8147,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -7634,6 +8167,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7647,6 +8181,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7661,6 +8196,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7674,6 +8210,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7692,6 +8229,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -7705,6 +8243,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7718,6 +8257,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7731,6 +8271,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -7749,6 +8290,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7762,6 +8304,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7775,6 +8318,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7788,6 +8332,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7805,6 +8350,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7818,6 +8364,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7831,6 +8378,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -7844,6 +8392,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -7861,6 +8410,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]); 
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7874,6 +8424,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7887,6 +8438,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -7900,6 +8452,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7917,6 +8470,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -7930,6 +8484,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -7943,6 +8498,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -7956,6 +8512,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -7973,6 +8530,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -7986,6 +8544,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -7999,6 +8558,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -8012,6 +8572,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion10(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8039,10 +8600,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida11)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida11) && MatrizTablero[i][j].boton.getText()==null && !"11".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                   
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8057,6 +8619,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -8071,6 +8634,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8084,6 +8648,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8105,6 +8670,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8118,7 +8684,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton  && "inv".equals(caraObtenida11)){
                                     
                                    
-                                    invocacion11(MatrizTablero[i][j]);   
+                                    invocacion11(MatrizTablero[i][j]); 
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8134,6 +8701,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8147,6 +8715,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8167,6 +8736,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -8180,6 +8750,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8193,6 +8764,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8206,6 +8778,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -8225,6 +8798,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8238,6 +8812,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8252,6 +8827,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8265,6 +8841,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8283,6 +8860,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -8296,6 +8874,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8309,6 +8888,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8322,6 +8902,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -8340,6 +8921,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8353,6 +8935,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8366,6 +8949,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8379,6 +8963,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8396,6 +8981,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8409,6 +8995,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8422,6 +9009,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -8435,6 +9023,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -8452,6 +9041,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8465,6 +9055,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8478,6 +9069,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8491,6 +9083,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8508,6 +9101,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8521,6 +9115,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8534,6 +9129,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -8547,6 +9143,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8564,6 +9161,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -8577,6 +9175,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -8590,6 +9189,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -8603,6 +9203,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion11(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8630,10 +9231,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida12)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida12)&& MatrizTablero[i][j].boton.getText()==null && !"12".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8648,6 +9250,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -8662,6 +9265,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8675,6 +9279,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8696,6 +9301,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8709,7 +9315,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida12)){
                                     
                                    
-                                    invocacion12(MatrizTablero[i][j]);   
+                                    invocacion12(MatrizTablero[i][j]); 
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8725,6 +9332,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8738,6 +9346,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8758,6 +9367,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -8771,6 +9381,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8784,6 +9395,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8797,6 +9409,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -8816,6 +9429,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8829,6 +9443,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8843,6 +9458,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8856,6 +9472,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8874,6 +9491,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -8887,6 +9505,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8900,6 +9519,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8913,6 +9533,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -8931,6 +9552,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -8944,6 +9566,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -8957,6 +9580,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -8969,7 +9593,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida12)){
                                     
                                    
+                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -8987,6 +9613,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9000,6 +9627,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9013,6 +9641,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -9026,6 +9655,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -9043,6 +9673,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9056,6 +9687,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9069,6 +9701,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9082,6 +9715,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9099,6 +9733,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9112,6 +9747,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9125,6 +9761,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -9138,6 +9775,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9155,6 +9793,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -9168,6 +9807,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -9181,6 +9821,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -9194,6 +9835,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion12(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9220,10 +9862,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida13)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida13)&& MatrizTablero[i][j].boton.getText()==null && !"13".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                  
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9238,6 +9881,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -9252,6 +9896,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9265,6 +9910,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9286,6 +9932,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9300,6 +9947,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);   
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9315,6 +9963,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9328,6 +9977,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9348,6 +9998,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -9361,6 +10012,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9374,6 +10026,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9387,6 +10040,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -9406,6 +10060,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9419,6 +10074,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9433,6 +10089,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9446,6 +10103,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9464,6 +10122,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -9477,6 +10136,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9490,6 +10150,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9503,6 +10164,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -9521,6 +10183,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9534,6 +10197,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9547,6 +10211,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9560,6 +10225,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9577,6 +10243,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9590,6 +10257,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9603,6 +10271,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -9616,6 +10285,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -9633,6 +10303,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9646,6 +10317,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9659,6 +10331,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9672,6 +10345,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9689,6 +10363,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9702,6 +10377,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9715,6 +10391,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -9728,6 +10405,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9745,6 +10423,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -9757,7 +10436,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida13)){
                                     
                                    
+                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -9771,6 +10452,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -9784,6 +10466,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion13(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9810,10 +10493,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida14)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida14)&& MatrizTablero[i][j].boton.getText()==null && !"14".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9828,6 +10512,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -9842,6 +10527,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9855,6 +10541,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9876,6 +10563,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9889,7 +10577,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida14)){
                                     
                                    
-                                    invocacion14(MatrizTablero[i][j]);    
+                                    invocacion14(MatrizTablero[i][j]);   
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9905,6 +10594,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -9918,6 +10608,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -9938,6 +10629,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -9951,6 +10643,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -9964,6 +10657,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -9977,6 +10671,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -9996,6 +10691,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10009,6 +10705,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10023,6 +10720,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10036,6 +10734,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10054,6 +10753,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -10067,6 +10767,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10080,6 +10781,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10093,6 +10795,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -10111,6 +10814,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10124,6 +10828,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10137,6 +10842,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10150,6 +10856,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10167,6 +10874,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10180,6 +10888,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10192,7 +10901,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida14)){
                                     
                                    
+                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -10206,6 +10917,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i-2][j-1]);
@@ -10223,6 +10935,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10236,6 +10949,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10249,6 +10963,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10262,6 +10977,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10279,6 +10995,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10292,6 +11009,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10305,6 +11023,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -10318,6 +11037,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10335,6 +11055,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -10348,6 +11069,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -10361,6 +11083,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -10374,6 +11097,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion14(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10400,10 +11124,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 switch (rotado){
                                     case 0:
                            
-                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida15)){
+                                    if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida15) && MatrizTablero[i][j].boton.getText()==null && !"15".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                   
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10418,6 +11143,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -10432,6 +11158,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10445,6 +11172,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10466,6 +11194,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10479,7 +11208,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida15)){
                                     
                                    
-                                    invocacion15(MatrizTablero[i][j]);    
+                                    invocacion15(MatrizTablero[i][j]);   
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10495,6 +11225,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j+2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10508,6 +11239,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10527,7 +11259,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                 if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida15)){
                                     
                                    
+                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -10541,6 +11275,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10554,6 +11289,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10567,6 +11303,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-2][j-1]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-1][j]);
@@ -10586,6 +11323,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10599,6 +11337,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10613,6 +11352,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-2]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10626,6 +11366,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10644,6 +11385,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
@@ -10658,6 +11400,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                    
                                     invocacion15(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
@@ -10671,6 +11414,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                    
                                     invocacion15(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i+1][j+1]);
@@ -10683,6 +11427,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -10701,6 +11446,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10714,6 +11460,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10727,6 +11474,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10740,6 +11488,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10757,6 +11506,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10770,6 +11520,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-2][j]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10783,6 +11534,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
@@ -10813,6 +11565,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10826,6 +11579,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j+1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10839,6 +11593,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i][j-1]);
@@ -10852,6 +11607,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
+                                    
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10869,6 +11626,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i][j+1]);
@@ -10882,6 +11640,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i-1][j]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10895,6 +11654,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i][j-2]);
                                     despliegue(MatrizTablero[i+1][j-2]);
@@ -10908,6 +11668,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j+1]);
                                     despliegue(MatrizTablero[i-1][j]);
@@ -10925,6 +11686,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j+1]);
                                    despliegue(MatrizTablero[i][j-1]);
@@ -10938,6 +11700,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                    despliegue(MatrizTablero[i-1][j]);
                                    despliegue(MatrizTablero[i-1][j-1]);
                                    despliegue(MatrizTablero[i-2][j]);
@@ -10951,6 +11714,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i+1][j]);
                                     despliegue(MatrizTablero[i+1][j-1]);
                                     despliegue(MatrizTablero[i-1][j+1]);
@@ -10964,6 +11728,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                                     
                                    
                                     invocacion15(MatrizTablero[i][j]);
+                                    despliegue(MatrizTablero[i][j]);
                                     despliegue(MatrizTablero[i][j-1]);
                                     despliegue(MatrizTablero[i-1][j-1]);
                                     despliegue(MatrizTablero[i+1][j]);
@@ -10985,76 +11750,76 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             for(int j=0; j<15;j++) // recorrer filas
             {
            
-                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida1)){ //mago oscuro
+                if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida1) && MatrizTablero[i][j].boton.getText() == null && !"1".equals(MatrizTablero[i][j].boton.getText())&& !"terreno".equals(MatrizTablero[i][j].boton.getText())){ //mago oscuro
                     subActionPerformed1(i,j,e);
                 }
                    
            
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida2)){//goblin
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida2) && MatrizTablero[i][j].boton.getText()==null && !"2".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){//goblin
                     subActionPerformed2(i,j,e);
                 }
             
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)){//orco
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida3)&& MatrizTablero[i][j].boton.getText()==null && !"3".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){//orco
                     subActionPerformed3(i,j,e);
                    
                 }
     
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)){//pikachu
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida4)&& MatrizTablero[i][j].boton.getText()==null && !"4".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){//pikachu
                      subActionPerformed4(i,j,e);
                     
                 }
 
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)){// kuriboh 
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida5)&& MatrizTablero[i][j].boton.getText()==null && !"5".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){// kuriboh 
                     subActionPerformed5(i,j,e);
                 }
                     
      
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)){//agumon
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida6)&& MatrizTablero[i][j].boton.getText()==null && !"6".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){//agumon
                     subActionPerformed6(i,j,e);
                 }
 
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)){ // dboa
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida7)&& MatrizTablero[i][j].boton.getText()==null && !"7".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){ // dboa
                     subActionPerformed7(i,j,e);
                 }
  
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)){  // metabee             
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida8)&& MatrizTablero[i][j].boton.getText()==null && !"8".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){  // metabee             
                 subActionPerformed8(i,j,e);
                     
                 }
                
                 
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida9)){ //mago del tiempo
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida9)&& MatrizTablero[i][j].boton.getText()==null && !"9".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){ //mago del tiempo
                    subActionPerformed9(i,j,e);
  
                 }
 
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida10)){// guardian celta
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida10)&& MatrizTablero[i][j].boton.getText()==null && !"10".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){// guardian celta
                     
                      subActionPerformed10(i,j,e);
                      
                 }
 
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida11)){  // charizard
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida11)&& MatrizTablero[i][j].boton.getText()==null && !"11".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){  // charizard
                     subActionPerformed11(i,j,e);
                     
                 }
     
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida12)){  // maga oscura
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida12)&& MatrizTablero[i][j].boton.getText()==null && !"12".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){  // maga oscura
                     subActionPerformed12(i,j,e);
                     
                 }
 
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida13)){// slifer                  
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida13)&& MatrizTablero[i][j].boton.getText()==null && !"13".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){// slifer                  
                     subActionPerformed13(i,j,e);
 
                 }
      
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida14)){ //  mewtwo
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida14)&& MatrizTablero[i][j].boton.getText()==null && !"14".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){ //  mewtwo
                     subActionPerformed14(i,j,e);
                     
                 }
 
-                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida15)){  // garurumon
+                else if(e.getSource()==MatrizTablero[i][j].boton && "inv".equals(caraObtenida15)&& MatrizTablero[i][j].boton.getText()==null && !"15".equals(MatrizTablero[i][j].boton.getText()) && !"terreno".equals(MatrizTablero[i][j].boton.getText())){  // garurumon
                     
                     subActionPerformed15(i,j,e);
                     
@@ -11132,9 +11897,41 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                         MatrizTablero[i][j].boton.removeActionListener(this);
   
         }
-    }
-  }
-}
+
+            if(e.getSource()== MatrizTablero[i][j].boton && "ocupado".equals(MatrizTablero[i][j].boton.getText()) && auxMov >0 && MatrizTablero[i][j].boton.getText()!= null ){
+                               
+                 System.out.println(" boton funciona! " + terreno);
+                                    
+                                    MatrizTablero[i][j].boton.setText(MatrizTablero[i][j+1].boton.getText());
+                                      
+                                      MatrizTablero[i][j].boton.setIcon(MatrizTablero[i][j+1].boton.getIcon());
+                                       
+                                      MatrizTablero[i][j+1].boton.setText("ocupado");
+                                      
+        
+                                            MatrizTablero[i][j+1].boton.setIcon(null);
+                                              
+                                            auxMov = auxMov - 1; 
+                                            jlabelmov1.setText(String.valueOf(auxMov));}  
+                                            
+            if (e.getSource()== MatrizTablero[i][j].boton && MatrizTablero[i][j].boton.getText() == null ) {
+                 
+                System.out.println(" el terreno está " );
+            
+            MatrizTablero[i][j].boton.setText(null);
+             MatrizTablero[i][j].boton.setIcon(null);  
+             
+                                            
+            } else if (auxMov == 0){BotonMover1.setEnabled(false);} 
+           
+                                             
+                                        
+             }
+                                      
+
+            }
+            }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -11155,16 +11952,22 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         BotonFinalizar = new javax.swing.JButton();
+        BotonMover5 = new javax.swing.JButton();
+        BotonMover6 = new javax.swing.JButton();
+        BotonMover7 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         Dado21 = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
-        BotonMover2 = new javax.swing.JButton();
         BotonMagia2 = new javax.swing.JComboBox<>();
         BotonAtacar2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         BotonTrampa2 = new javax.swing.JComboBox<>();
         BotonFinalizar2 = new javax.swing.JButton();
+        BotonMover11 = new javax.swing.JButton();
+        BotonMover8 = new javax.swing.JButton();
+        BotonMover10 = new javax.swing.JButton();
+        BotonMover9 = new javax.swing.JButton();
         jProgressBar2 = new javax.swing.JProgressBar();
         PanelAcciones2 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -11339,8 +12142,13 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         });
 
         BotonMover1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-        BotonMover1.setText("MOVER");
+        BotonMover1.setText("UP");
         BotonMover1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BotonMover1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMover1ActionPerformed(evt);
+            }
+        });
 
         BotonTrampa1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -11362,23 +12170,60 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             }
         });
 
+        BotonMover5.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        BotonMover5.setText("LEFT");
+        BotonMover5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BotonMover5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMover5ActionPerformed(evt);
+            }
+        });
+
+        BotonMover6.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        BotonMover6.setText("RIGHT");
+        BotonMover6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BotonMover6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMover6ActionPerformed(evt);
+            }
+        });
+
+        BotonMover7.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        BotonMover7.setText("DOWN");
+        BotonMover7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BotonMover7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMover7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BotonMover1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BotonAtacar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                .addComponent(BotonAtacar1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(BotonMover7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BotonMover1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(BotonMover5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BotonMover6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addComponent(BotonFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BotonMagia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -11391,11 +12236,19 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
                 .addComponent(BotonAtacar1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BotonMover1)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(BotonMover5)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(BotonMover6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BotonMover7)))
+                .addGap(1, 1, 1)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -11403,9 +12256,9 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonMagia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonTrampa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotonFinalizar)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 180, 170));
@@ -11419,10 +12272,6 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         getContentPane().add(Dado21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 70, -1));
 
         jPanel8.setBackground(new java.awt.Color(204, 0, 0));
-
-        BotonMover2.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
-        BotonMover2.setText("MOVER");
-        BotonMover2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         BotonMagia2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -11453,6 +12302,37 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             }
         });
 
+        BotonMover11.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        BotonMover11.setText("LEFT");
+        BotonMover11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BotonMover11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMover11ActionPerformed(evt);
+            }
+        });
+
+        BotonMover8.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        BotonMover8.setText("UP");
+        BotonMover8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        BotonMover10.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        BotonMover10.setText("DOWN");
+        BotonMover10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BotonMover10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMover10ActionPerformed(evt);
+            }
+        });
+
+        BotonMover9.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        BotonMover9.setText("RIGHT");
+        BotonMover9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        BotonMover9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMover9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -11460,34 +12340,55 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BotonMover2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BotonAtacar2, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BotonFinalizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BotonMagia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(20, 20, 20)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BotonFinalizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(BotonTrampa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(BotonMagia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(BotonTrampa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(BotonAtacar2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 11, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(BotonMover10, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BotonMover8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(BotonMover11, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BotonMover9, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addComponent(BotonAtacar2)
-                .addGap(18, 18, 18)
-                .addComponent(BotonMover2)
-                .addGap(18, 18, 18)
+                .addGap(1, 1, 1)
+                .addComponent(BotonMover8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(BotonMover11)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(BotonMover9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BotonMover10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
@@ -11665,9 +12566,8 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addComponent(BotonAtacar3)
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addComponent(BotonMover3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -12788,7 +13688,7 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         System.out.println("elije tu dado");
            int seleccionDados= BoxDado11.getSelectedIndex();
           
-           if (contadordados<=3){ 
+           if (contadordados<=100){ 
                 System.out.println("contador="+contadordados);
            switch (seleccionDados) {
                             case 0: BotonDetener.setEnabled(true);
@@ -13223,6 +14123,45 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     private void BotonFinalizar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFinalizar4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonFinalizar4ActionPerformed
+
+    private void BotonMover7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMover7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonMover7ActionPerformed
+
+    private void BotonMover6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMover6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonMover6ActionPerformed
+
+    private void BotonMover5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMover5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonMover5ActionPerformed
+
+    private void BotonMover9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMover9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonMover9ActionPerformed
+
+    private void BotonMover10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMover10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonMover10ActionPerformed
+
+    private void BotonMover11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMover11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonMover11ActionPerformed
+
+    private void BotonMover1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMover1ActionPerformed
+            if(auxMov>=1){
+
+               for(int i=0; i<15;i++) // recorrer columnas 
+        {
+            for(int j=0; j<15;j++) // recorrer filas
+            {
+
+        MatrizTablero[i][j].boton.addActionListener(this); } 
+               }
+            }
+     
+
+    }//GEN-LAST:event_BotonMover1ActionPerformed
                         
     /**
      * @param args the command line arguments
@@ -13340,9 +14279,15 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JComboBox<String> BotonMagia3;
     private javax.swing.JComboBox<String> BotonMagia4;
     private javax.swing.JButton BotonMover1;
-    private javax.swing.JButton BotonMover2;
+    private javax.swing.JButton BotonMover10;
+    private javax.swing.JButton BotonMover11;
     private javax.swing.JButton BotonMover3;
     private javax.swing.JButton BotonMover4;
+    private javax.swing.JButton BotonMover5;
+    private javax.swing.JButton BotonMover6;
+    private javax.swing.JButton BotonMover7;
+    private javax.swing.JButton BotonMover8;
+    private javax.swing.JButton BotonMover9;
     private javax.swing.JComboBox<String> BotonTrampa1;
     private javax.swing.JComboBox<String> BotonTrampa2;
     private javax.swing.JComboBox<String> BotonTrampa3;
