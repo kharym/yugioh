@@ -2,13 +2,20 @@
 package Vistas;
 
 import Controladores.ControlRegistro;
+import Modelo.ConexionDB;
 import javax.swing.JFrame;
+import java.sql.*;
+import javax.swing.JButton;
+
+
+
 
 
 public class VRegistro extends javax.swing.JDialog {
 
-    
+    ConexionDB mdb;
     ControlRegistro cr;
+    
     
     /**
      * Creates new form VRegistro
@@ -36,15 +43,16 @@ public class VRegistro extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TextoPass1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        TextoPass2 = new javax.swing.JTextField();
+        TextoUsuario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         botonVolver = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BotonOk = new javax.swing.JButton();
+        CheckBoxPNJ = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -53,7 +61,13 @@ public class VRegistro extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Engravers MT", 3, 18)); // NOI18N
         jLabel3.setText("cONTRASEÑA");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 280, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, -1));
+
+        TextoPass1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoPass1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(TextoPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 250, -1));
 
         jLabel4.setFont(new java.awt.Font("Engravers MT", 3, 18)); // NOI18N
         jLabel4.setText("JEFE DE TERRENO");
@@ -62,14 +76,25 @@ public class VRegistro extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Engravers MT", 3, 18)); // NOI18N
         jLabel5.setText("nOMBRE USUARIO");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 280, -1));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 250, -1));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 250, -1));
+        getContentPane().add(TextoPass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 250, -1));
+
+        TextoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoUsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(TextoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 250, -1));
 
         jLabel6.setFont(new java.awt.Font("Engravers MT", 3, 18)); // NOI18N
         jLabel6.setText("REPETIR CONTRASEÑA");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 310, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 220, -1));
 
         botonVolver.setFont(new java.awt.Font("Engravers MT", 3, 11)); // NOI18N
@@ -81,9 +106,22 @@ public class VRegistro extends javax.swing.JDialog {
         });
         getContentPane().add(botonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 30));
 
-        jButton2.setFont(new java.awt.Font("Engravers MT", 3, 11)); // NOI18N
-        jButton2.setText("OK");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 90, 50));
+        BotonOk.setFont(new java.awt.Font("Engravers MT", 3, 11)); // NOI18N
+        BotonOk.setText("OK");
+        BotonOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonOkActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 90, 50));
+
+        CheckBoxPNJ.setText("   PNJ");
+        CheckBoxPNJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBoxPNJActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CheckBoxPNJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 60, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vistaregistro.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -94,6 +132,28 @@ public class VRegistro extends javax.swing.JDialog {
     private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         cr.volverR();
     }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void BotonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonOkActionPerformed
+        cr.actionPerformed(evt);
+       
+    }//GEN-LAST:event_BotonOkActionPerformed
+
+    private void CheckBoxPNJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxPNJActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_CheckBoxPNJActionPerformed
+
+    private void TextoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoUsuarioActionPerformed
+
+    private void TextoPass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoPass1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoPass1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,16 +198,46 @@ public class VRegistro extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonOk;
+    private javax.swing.JCheckBox CheckBoxPNJ;
+    private javax.swing.JTextField TextoPass1;
+    private javax.swing.JTextField TextoPass2;
+    private javax.swing.JTextField TextoUsuario;
     private javax.swing.JButton botonVolver;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+public JButton getBotonConfirmarRegistro(){
+    return this.BotonOk;
+}
+
+public String getTextoUsuario(){
+    String texto = TextoUsuario.getText();
+    return texto;
+}
+
+public String getContrasena1(){
+    String texto = TextoPass1.getText();
+    return texto;
+}
+
+public String getContrasena2(){
+    String texto = TextoPass2.getText();
+    return texto;
+
+}
+
+public boolean estadoPNJ(){
+        if(CheckBoxPNJ.isSelected() == true){
+            return true;
+        }else{
+            return false;
+        }
+
+}
 }

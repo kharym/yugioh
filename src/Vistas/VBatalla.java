@@ -12690,6 +12690,11 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 580, -1, 20));
 
         BoxRotar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BoxRotar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoxRotarActionPerformed(evt);
+            }
+        });
         getContentPane().add(BoxRotar, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 620, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Engravers MT", 3, 12)); // NOI18N
@@ -14162,6 +14167,10 @@ public class VBatalla extends javax.swing.JDialog implements ActionListener {
      
 
     }//GEN-LAST:event_BotonMover1ActionPerformed
+
+    private void BoxRotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxRotarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BoxRotarActionPerformed
                         
     /**
      * @param args the command line arguments
